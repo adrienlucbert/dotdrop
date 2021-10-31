@@ -1,0 +1,26 @@
+{
+  "languageserver": {
+    "clangd": {
+      "command": "clangd",
+      "args": [
+        "--background-index",
+        "--clang-tidy",
+        "--all-scopes-completion",
+        "--completion-style=detailed",
+      ],
+      "filetypes": [
+        "c",
+        "cpp",
+        "objc",
+        "objcpp"
+      ],
+      "rootPatterns": [
+        "compile_flags.txt",
+        "compile_commands.json",
+        ".vim/",
+        ".git/"
+      ]
+    }
+  },
+  "diagnostic.virtualText": true
+}

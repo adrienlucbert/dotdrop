@@ -1,0 +1,38 @@
+snippet link "link" i
+[$2]($1)
+endsnippet
+
+snippet img "image" i
+![$2]($1)
+endsnippet
+
+snippet fig "centered image with caption" b
+<figure style="text-align:center">
+	<img alt="$2" src="$1"/>
+	<figcaption>${2}</figcaption>
+</figure>
+endsnippet
+
+snippet h1 "level 1 header" b
+# $1
+endsnippet
+
+snippet h2 "level 2 header" b
+## $1
+endsnippet
+
+snippet h3 "level 3 header" b
+### $1
+endsnippet
+
+snippet h4 "level 4 header" b
+#### $1
+endsnippet
+
+snippet h5 "level 5 header" b
+##### $1
+endsnippet
+
+snippet h6 "level 6 header" b
+###### $1
+endsnippet

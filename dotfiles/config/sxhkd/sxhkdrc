@@ -1,0 +1,149 @@
+
+### Application control {
+
+# program launcher
+super + p
+	rofi -show run
+
+super + shift + p
+  rofi -show drun
+
+# launch terminal emulator
+super + Return
+	kitty
+
+# launch browser
+super + w
+  brave
+
+# launch file explorer
+super + e
+  pcmanfm
+
+# launch process viewer
+ctrl + alt + Delete
+  kitty -e htop
+
+# Spotify control
+super + m; {h,Return,l}
+  playerctl -p spotify {previous,play-pause,next}
+
+# make sxhkd reload its configuration files:
+super + shift + r
+	~/.config/sxhkd/scripts/reload.sh
+
+# }
+
+
+
+
+### System control {
+
+# @Print: take a screenshot of all screens and copy to clipboard
+# shift + @Print: take a screenshot of a selected area and copy to clipboard
+# alt + @Print: take a screenshot of a the focused window and copy to clipboard
+# add ctrl to save to file instead of copy to clipboard
+{_,shift + ,alt + }{ctrl + ,_} @Print
+  scrot -{e,sfe,ue} {'mv $f ~/screenshots','xclip -sel clip -target image/png -i $f && rm $f'}
+
+# mute sound
+XF86AudioMute
+  amixer set Master toggle
+
+# raise/lower volume
+XF86Audio{Raise,Lower}Volume
+  amixer set Master {10%+,10%-} unmute
+
+# raise laptop brightness
+XF86MonBrightnessUp
+  xbacklight -inc 10
+
+# lower laptop brightness
+XF86MonBrightnessDown
+  xbacklight -dec 10
+
+# raise global brightness
+shift + XF86MonBrightnessUp
+  xlight add 0.1
+
+# lower global brightness
+shift + XF86MonBrightnessDown
+  xlight sub 0.1
+
+# power control
+super + Escape ; {l,e,s,r,shift+s}
+  powercontrol {lock,logout,suspend,reboot,shutdown}
+
+# sxhkd help menu
+super + question
+  ~/.config/sxhkd/scripts/help.sh
+
+# }
+
+  
+
+
+### wm control {
+
+# quit/restart bspwm
+# super + alt + {,r}
+#   ~/.config/bspwm/scripts/reload.sh
+
+# }
+
+
+
+
+### Node control {
+
+# close and kill the focused node
+super + q
+	i3-msg kill
+
+# }
+
+
+
+
+### Layout {
+
+super + f
+# toggle fullscreen mode for the focused window
+  i3-msg fullscreen toggle
+
+super + shift + space
+  i3-msg floating toggle
+
+# }
+
+
+
+
+### Move, Focus, Resize {
+
+# focus or move the node to the given direction
+super + {_,shift + }{h,j,k,l}
+  i3-msg {focus,move} {left,down,up,right}
+
+# focus the given desktop
+super + {1, 2, 3, 4, 5, 6, 7, 8, 9, 0}
+  i3-msg workspace number '{1-9,10}'
+
+# cycle through desktops
+super + {_,shift + } Tab
+  i3-msg workspace {next,prev}
+
+# move the node to the given desktop
+super + shift + {1-9,0}
+  i3-msg move container to workspace number '{1-9,10}'
+
+# resize window mode (i3-like)
+# super + r : {h,j,k,l}
+#   ~/.config/bspwm/scripts/resize.sh {left,down,up,right} 30
+
+## move a floating window
+#super + {h,j,k,l}
+#  bspc node -v {-20 0,0 20,0 -20,20 0}
+
+super + b + t
+  export BT_DEVICE=`bluetoothctl info | head -n1 | cut -d' ' -f2`; bluetoothctl disconnect $BT_DEVICE && bluetoothctl connect $BT_DEVICE && pacmd set-card-profile "bluez_card.$BT_DEVICE" a2dp_sink

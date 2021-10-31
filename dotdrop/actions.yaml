@@ -1,1 +1,7 @@
 actions:
+  pre:
+    install_ohmyzsh: ./dotdrpo/scripts/install_ohmyzsh.sh
+    vim_install_packer: ./dotdrpo/scripts/nvim_install_packer.sh
+    vim_install_language_servers: ./dotdrop/scripts/install_language_servers.sh
+  post:
+    set_wallpaper: ~/.local/bin/chwp {{@@ wallpaper_name @@}}

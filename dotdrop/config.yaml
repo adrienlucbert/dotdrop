@@ -12,4 +12,151 @@ config:
   import_actions:
   - actions.yaml
 dotfiles:
+  f_zshrc:
+    src: zshrc
+    dst: ~/.zshrc
+  f_zsh_profile:
+    src: zsh_profile
+    dst: ~/.zsh_profile
+    chmod: '777'
+  f_xinitrc:
+    src: xinitrc
+    dst: ~/.xinitrc
+    chmod: '777'
+  f_bashrc:
+    src: bashrc
+    dst: ~/.bashrc
+  f_xresources:
+    src: Xresources
+    dst: ~/.Xresources
+    chmod: '755'
+  d_xres:
+    src: xres
+    dst: ~/.xres
+  f_local_bin_a2ensite:
+    src: local/bin/a2ensite
+    dst: ~/.local/bin/a2ensite
+    chmod: '755'
+  f_local_bin_a2dissite:
+    src: local/bin/a2dissite
+    dst: ~/.local/bin/a2dissite
+    chmod: '755'
+  f_local_bin_batterywarn:
+    src: local/bin/batterywarn
+    dst: ~/.local/bin/batterywarn
+    chmod: '755'
+  f_local_bin_chwp:
+    src: local/bin/chwp
+    dst: ~/.local/bin/chwp
+    chmod: '755'
+  f_local_bin_idlelock:
+    src: local/bin/idlelock
+    dst: ~/.local/bin/idlelock
+    chmod: '755'
+  f_local_bin_monitorcontrol:
+    src: local/bin/monitorcontrol
+    dst: ~/.local/bin/monitorcontrol
+    chmod: '755'
+  f_local_bin_powercontrol:
+    src: local/bin/powercontrol
+    dst: ~/.local/bin/powercontrol
+    chmod: '755'
+  f_local_bin_xlight:
+    src: local/bin/xlight
+    dst: ~/.local/bin/xlight
+    chmod: '755'
+  f_local_bin_discordspell:
+    src: local/bin/discordspell
+    dst: ~/.local/bin/discordspell
+    chmod: '755'
+  f_bash_profile:
+    src: bash_profile
+    dst: ~/.bash_profile
+  d_config_i3:
+    src: config/i3
+    dst: ~/.config/i3
+  d_config_polybar:
+    src: config/polybar
+    dst: ~/.config/polybar
+  d_config_dunst:
+    src: config/dunst
+    dst: ~/.config/dunst
+  d_config_kitty:
+    src: config/kitty
+    dst: ~/.config/kitty
+  d_config_nvim:
+    src: config/nvim
+    dst: ~/.config/nvim
+  d_config_picom:
+    src: config/picom
+    dst: ~/.config/picom
+  d_config_redshift:
+    src: config/redshift
+    dst: ~/.config/redshift
+  d_config_rofi:
+    src: config/rofi
+    dst: ~/.config/rofi
+  d_config_sxhkd:
+    src: config/sxhkd
+    dst: ~/.config/sxhkd
+  d_config_wallpapers:
+    src: config/wallpapers
+    dst: ~/.config/wallpapers
+  f_config_autostart.sh:
+    src: config/autostart.sh
+    dst: ~/.config/autostart.sh
+    chmod: '755'
+  f_gitconfig:
+    src: gitconfig
+    dst: ~/.gitconfig
+  f_etc_paru.conf:
+    src: etc/paru.conf
+    dst: /etc/paru.conf
+  f_etc_pacman.conf:
+    src: etc/pacman.conf
+    dst: /etc/pacman.conf
+  d_etc_udev_rules.d:
+    src: etc/udev/rules.d
+    dst: /etc/udev/rules.d
+  d_etc_x11_xorg.conf.d:
+    src: etc/X11/xorg.conf.d
+    dst: /etc/X11/xorg.conf.d
+  f_etc_default_grub:
+    src: etc/default/grub
+    dst: /etc/default/grub
 profiles:
+  alucbert-x1:
+    dotfiles:
+    - f_zshrc
+    - f_zsh_profile
+    - f_xinitrc
+    - f_bashrc
+    - f_xresources
+    - d_xres
+    - f_local_bin_a2ensite
+    - f_local_bin_a2dissite
+    - f_local_bin_batterywarn
+    - f_local_bin_chwp
+    - f_local_bin_idlelock
+    - f_local_bin_monitorcontrol
+    - f_local_bin_powercontrol
+    - f_local_bin_xlight
+    - f_local_bin_discordspell
+    - f_bash_profile
+    - d_config_i3
+    - d_config_polybar
+    - d_config_dunst
+    - d_config_kitty
+    - d_config_nvim
+    - d_config_picom
+    - d_config_redshift
+    - d_config_rofi
+    - d_config_sxhkd
+    - d_config_wallpapers
+    - f_config_autostart.sh
+    - f_gitconfig
+    - f_etc_paru.conf
+    - f_etc_pacman.conf
+    - d_etc_udev_rules.d
+    - d_etc_x11_xorg.conf.d
+    - f_etc_default_grub

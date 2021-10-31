@@ -1,0 +1,24 @@
+#!/usr/bin/env sh
+
+if [ -z "$1" ]; then
+  echo "Usage: `echo $0 | rev | cut -d'/' -f1 | rev` <string>"
+  exit 1
+fi
+
+grep -o . <<< "${1,,}" | while read char; do
+  case $char in
+    [a-z])
+      echo -n ":regional_indicator_$char: "
+      ;;
+    [0-9]|[!?])
+      arr=(one two three four five six seven eight nine exclamation question)
+      echo -n ":${arr[$char - 1]}: "
+      ;;
+    "!")
+      echo -n ":exclamation: "
+      ;;
+    *)
+      echo -n "$char  "
+      ;;
+  esac
+done

@@ -1,0 +1,4 @@
+450c450
+<     i = int( math.ceil( (f - context["scale"][0]) / (context["scale"][1]-context["scale"][0]) * (len(colormap)-1) ) )
+---
+>     i = 0

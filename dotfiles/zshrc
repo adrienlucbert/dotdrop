@@ -205,7 +205,7 @@ csv()
   column -t -s$delimiter $1 | less
 }
 
-alias dotdrop="dotdrop --cfg=$HOME/dotdrop/dotdrop/config.yaml"
+alias dotdrop="DOTDROP_CONFIG=$HOME/dotdrop/dotdrop/config.yaml dotdrop"
 
 alias luamake=/home/alucbert/install/lua-language-server/3rd/luamake/luamake
 

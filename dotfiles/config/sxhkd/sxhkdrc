@@ -32,6 +32,10 @@ super + m; {h,Return,l}
 super + shift + r
 	~/.config/sxhkd/scripts/reload.sh
 
+# close the last dunst notification
+ctrl + space
+  dunstctl close
+
 # }
 
 

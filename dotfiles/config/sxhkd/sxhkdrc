@@ -20,13 +20,17 @@ super + w
 super + e
   pcmanfm
 
+# launch a tui spotify client
+super + s
+  kitty -e spt
+
 # launch process viewer
 ctrl + alt + Delete
   kitty -e htop
 
 # Spotify control
 super + m; {h,Return,l}
-  playerctl -p spotify {previous,play-pause,next}
+  playerctl -p spotify,spotifyd {previous,play-pause,next}
 
 # make sxhkd reload its configuration files:
 super + shift + r
@@ -48,7 +52,7 @@ ctrl + space
 # alt + @Print: take a screenshot of a the focused window and copy to clipboard
 # add ctrl to save to file instead of copy to clipboard
 {_,shift + ,alt + }{ctrl + ,_} @Print
-  scrot -{e,sfe,ue} {'mv $f ~/screenshots','xclip -sel clip -target image/png -i $f && rm $f'}
+  scrot {-e,-fs -e,-ue} {'mv $f ~/screenshots','xclip -sel clip -target image/png -i $f && rm $f'}
 
 # mute sound
 XF86AudioMute

@@ -32,6 +32,6 @@ return function ()
 
   telescope.load_extension('fzf_writer')
 
-  map('n', '<C-p>', ':lua require(\'telescope\').extensions.fzf_writer.files()<CR>')
+  map('n', '<C-p>', ':lua require\'telescope.builtin\'.find_files()<CR>')
   -- map('n', '<C-j>', ':lua require(\'telescope.builtin\').live_grep()<CR>')
 end

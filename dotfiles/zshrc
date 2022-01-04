@@ -4,6 +4,8 @@
 # Path to your oh-my-zsh installation.
 export ZSH="/home/alucbert/.oh-my-zsh"
 export PATH="$PATH:/home/alucbert/.dotnet/tools"
+# export ANDROID_AVD_HOME="$HOME/.android/avd"
+# export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
 
 export EDITOR=nvim
 

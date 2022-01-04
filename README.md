@@ -47,3 +47,21 @@ and then run it to apply all patches.
 ```bash
 sudo ./patches/patch.sh
 ```
+
+## Additional actions
+
+### Setting up TUI Spotify client
+
+I use a [spotify-tui](https://github.com/Rigellute/spotify-tui), a terminal-based
+UI, to control Spotify. It plays music on [spotifyd](https://github.com/Spotifyd/spotifyd),
+a Spotify client running as a daemon.
+
+```bash
+# setup keyring for spotifyd
+secret-tool store --label='spotifyd' application rust-keyring service spotifyd username "adrien.lucbert@epitech.eu"
+```
+Get a client id and secret from [Spotify dashboard](https://developer.spotify.com/dashboard/applications).
+```bash
+# setup spotify-tui
+spt
+```

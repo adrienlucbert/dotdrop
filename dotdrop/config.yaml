@@ -121,48 +121,56 @@ dotfiles:
   d_etc_x11_xorg.conf.d:
     src: etc/X11/xorg.conf.d
     dst: /etc/X11/xorg.conf.d
+  f_config_spotifyd_spotifyd.conf_1:
+    src: config/spotifyd/spotifyd.conf
+    dst: ~/.config/spotifyd/spotifyd.conf
+  f_config_systemd_user_spotifyd.service:
+    src: config/systemd/user/spotifyd.service
+    dst: ~/.config/systemd/user/spotifyd.service
 profiles:
   tty:
     actions:
-      - install_ohmyzsh
-      - vim_install_packer
-      - vim_install_language_servers
+    - install_ohmyzsh
+    - vim_install_packer
+    - vim_install_language_servers
     dotfiles:
-      - f_zshrc
-      - f_zsh_profile
-      - f_bashrc
-      - f_local_bin_a2ensite
-      - f_local_bin_a2dissite
-      - f_bash_profile
-      - d_config_nvim
-      - f_gitconfig
-      - f_etc_paru.conf
-      - f_etc_pacman.conf
+    - f_zshrc
+    - f_zsh_profile
+    - f_bashrc
+    - f_local_bin_a2ensite
+    - f_local_bin_a2dissite
+    - f_bash_profile
+    - d_config_nvim
+    - f_gitconfig
+    - f_etc_paru.conf
+    - f_etc_pacman.conf
   gui:
     include:
-      - tty-only
+    - tty
     actions:
-      - set_wallpaper
+    - set_wallpaper
     dotfiles:
-      - f_xinitrc
-      - f_xresources
-      - d_xres
-      - f_local_bin_batterywarn
-      - f_local_bin_chwp
-      - f_local_bin_idlelock
-      - f_local_bin_monitorcontrol
-      - f_local_bin_powercontrol
-      - f_local_bin_xlight
-      - f_local_bin_discordspell
-      - d_config_i3
-      - d_config_polybar
-      - d_config_dunst
-      - d_config_kitty
-      - d_config_picom
-      - d_config_redshift
-      - d_config_rofi
-      - d_config_sxhkd
-      - d_config_wallpapers
-      - f_config_autostart.sh
-      - d_etc_udev_rules.d
-      - d_etc_x11_xorg.conf.d
+    - f_xinitrc
+    - f_xresources
+    - d_xres
+    - f_local_bin_batterywarn
+    - f_local_bin_chwp
+    - f_local_bin_idlelock
+    - f_local_bin_monitorcontrol
+    - f_local_bin_powercontrol
+    - f_local_bin_xlight
+    - f_local_bin_discordspell
+    - d_config_i3
+    - d_config_polybar
+    - d_config_dunst
+    - d_config_kitty
+    - d_config_picom
+    - d_config_redshift
+    - d_config_rofi
+    - d_config_sxhkd
+    - d_config_wallpapers
+    - f_config_autostart.sh
+    - d_etc_udev_rules.d
+    - d_etc_x11_xorg.conf.d
+    - f_config_spotifyd_spotifyd.conf_1
+    - f_config_systemd_user_spotifyd.service

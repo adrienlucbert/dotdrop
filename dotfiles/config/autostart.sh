@@ -35,7 +35,8 @@ run() {
 ##### Autostart {{{
 
   # Status bar
-  run "polybar" ~/.config/polybar/launch.sh
+  # run "polybar" ~/.config/polybar/launch.sh
+  run "" i3status
 
   # Better key autorepeat rate
   run "" xset r rate 200 50

@@ -54,7 +54,8 @@ run() {
   once "dunst" dunst -config ~/.config/dunst/dunstrc
 
   # Compositor
-  run "picom" picom --experimental-backends --config ~/.config/picom/picom.conf;
+  run "picom" picom --config ~/.config/picom/picom.conf;
+  # run "xcompngr" xcompmgr;
 
   # Network manager applet
   once "nm-applet" nm-applet

@@ -1,0 +1,7 @@
+#!/usr/bin/sh
+
+# This file is named code to trick Unity into thinking this is VSCode.
+# It makes Unity generate .csproj and .sln files useful to LSP, while using
+# my favorite code editor.
+
+kitty nvim $@

@@ -127,6 +127,10 @@ dotfiles:
   f_config_systemd_user_spotifyd.service:
     src: config/systemd/user/spotifyd.service
     dst: ~/.config/systemd/user/spotifyd.service
+  f_local_bin_unity-editor_code:
+    src: local/bin/unity-editor/code
+    dst: ~/.local/bin/unity-editor/code
+    chmod: '755'
 profiles:
   tty:
     actions:
@@ -174,3 +178,5 @@ profiles:
     - d_etc_x11_xorg.conf.d
     - f_config_spotifyd_spotifyd.conf_1
     - f_config_systemd_user_spotifyd.service
+    - f_local_bin_unity-editor_code
+    - d_config_nvim

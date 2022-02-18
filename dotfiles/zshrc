@@ -1,82 +1,24 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
-# Path to your oh-my-zsh installation.
-export ZSH="/home/alucbert/.oh-my-zsh"
-export PATH="$PATH:/home/alucbert/.dotnet/tools"
-# export ANDROID_AVD_HOME="$HOME/.android/avd"
-# export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
-
-export EDITOR=nvim
-
 [[ -f $HOME/.zsh_profile ]] && source $HOME/.zsh_profile
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+# ---- Custom PATH extensions ----
+export PATH="$PATH:/home/alucbert/.dotnet/tools"
+export PATH="$PATH:/home/alucbert/.local/share/gem/ruby/3.0.0/bin"
+export PATH="$PATH:/home/alucbert/perl5/bin"
+
+# ---- Misc environment ----
+export ZSH="/home/alucbert/.oh-my-zsh"
+export EDITOR=nvim
+
+## perl environment
+export PERL5LIB="$PERL5LIB:/home/alucbert/perl5/lib/perl5"
+export PERL_LOCAL_LIB_ROOT="$PERL_LOCAL_LIB_ROOT:/home/alucbert/perl5"
+export PERL_MB_OPT="--install_base \"/home/alucbert/perl5\""
+export PERL_MM_OPT="INSTALL_BASE=/home/alucbert/perl5"
+
+# ---- Zsh configuration ----
 ZSH_THEME="robbyrussell"
-
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
 ENABLE_CORRECTION="false"
 
-# Uncomment the following line to display red dots whilst waiting for completion.
-# Caution: this setting can cause issues with multiline prompts (zsh 5.7.1 and newer seem to work)
-# See https://github.com/ohmyzsh/ohmyzsh/issues/5765
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
 plugins=(
   zsh-autosuggestions
   git
@@ -84,36 +26,19 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# User configuration
+## enable vi mode
+bindkey -v
+export KEYTIMEOUT=1
 
-# export MANPATH="/usr/local/man:$MANPATH"
+## autocomplete plugins
+[[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
+autoload bashcompinit && bashcompinit
+autoload -Uz compinit && compinit
+complete -C '/usr/bin/aws_completer' aws
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-## upgrade packages
-alias upgrade="sudo pacman -Syyu"
-
+# ---- Aliases ----
 ## autoremove unneeded dependencies
 alias autoremove="sudo pacman -Rns \$(pacman -Qtdq)"
 
@@ -123,48 +48,41 @@ alias font-refresh="fc-cache -fv"
 ## merge Xresources, useful for urxvt & rofi theming
 alias merge="xrdb ~/.Xresources"
 
-alias zshconf="vim ~/.zshrc"
-alias i3conf="vim ~/.config/i3/config"
-alias vimconf="vim ~/.config/nvim"
+alias zshconf="$EDITOR ~/.zshrc"
+alias i3conf="$EDITOR ~/.config/i3/config"
+alias vimconf="$EDITOR ~/.config/nvim"
 
-## clear screen
 alias c="clear"
+alias locate="find . | ag"
 
-# locate files or folder by name
-alias locate="find . | grep"
-
-# make shortcuts
+## make shortcuts
 alias makef='make fclean'
 alias makec='make clean'
 alias maked='make debug'
 alias maker='make re'
 
-# count lines of code in current directory
-alias lines='find . -name "*.c" -or -name "*.cpp" -or -name "*.h" -or -name "*.hpp" -or -name "*.sh" -or -name "*.py" -or -name "*.js" | xargs wc -l'
+alias lines='cloc --exclude-dir=build,deps --exclude-ext=json .'
 
 alias fixbt="pacmd set-card-profile bluez_card.70_BF_92_01_DB_57 a2dp_sink"
+alias btctl="bluetoothctl"
 
 alias cp="rsync -az --info=progress2 --no-inc-recursive" 
 
 alias colortest="npx colortest"
 
-# receive missing gpg key
+## receive missing gpg key
 alias gpgrecv="gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys"
 
-# enable vi mode
-bindkey -v
-export KEYTIMEOUT=1
+alias dotdrop="DOTDROP_CONFIG=$HOME/dotdrop/dotdrop/config.yaml dotdrop"
 
-alias vim="nvim"
+alias luamake=/home/alucbert/install/lua-language-server/3rd/luamake/luamake
 
+# ---- Programs configuration and custom commands ----
 visum() {
   bash /usr/share/visum/scripts/visum.sh $@
 }
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
+## conda
 __conda_setup="$('/opt/anaconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
@@ -176,7 +94,6 @@ else
     fi
 fi
 unset __conda_setup
-# <<< conda initialize <<<
 
 nbc()
 {
@@ -188,11 +105,6 @@ valgrind()
   (set -o pipefail; /usr/bin/valgrind $@ 2>&1 | colout -t valgrind)
 }
 
-cmake()
-{
-  /usr/bin/cmake $1 -GNinja -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ ${@:2}
-}
-
 csv()
 {
   delimiter=$2
@@ -201,22 +113,8 @@ csv()
   fi
   if [ -z "$1" ]; then
     >&2 echo "Open a CSV file in your terminal"
-    >&2 echo "Usage: csv filename"
+    >&2 echo "Usage: csv filename [delimiter]"
     return 1
   fi
   column -t -s$delimiter $1 | less
 }
-
-alias dotdrop="DOTDROP_CONFIG=$HOME/dotdrop/dotdrop/config.yaml dotdrop"
-
-alias luamake=/home/alucbert/install/lua-language-server/3rd/luamake/luamake
-
-alias btctl="bluetoothctl"
-
-# tabtab source for packages
-# uninstall by removing these lines
-[[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
-
-autoload bashcompinit && bashcompinit
-autoload -Uz compinit && compinit
-complete -C '/usr/bin/aws_completer' aws

@@ -25,6 +25,7 @@ return require('packer').startup({
     }
 
     -- LSP
+    use { 'hrsh7th/cmp-nvim-lsp' }
     use {
       'neovim/nvim-lspconfig',
       requires = {
@@ -35,6 +36,7 @@ return require('packer').startup({
       },
       config = require('lsp'),
     }
+    use 'mustache/vim-mustache-handlebars'
     use {
       'jose-elias-alvarez/nvim-lsp-ts-utils',
       requires = {
@@ -43,18 +45,27 @@ return require('packer').startup({
       }
     }
     -- Completion menu
-    use { 'hrsh7th/nvim-compe', config = require('config.compe') }
+    use { 'hrsh7th/nvim-cmp', config = require('config.nvim-cmp') }
     -- Diagnostics menu
     use {
       'folke/lsp-trouble.nvim',
       requires = 'kyazdani42/nvim-web-devicons',
       config = require('config.lsp-trouble'),
     }
-    -- Snippets
     use {
-      'SirVer/ultisnips',
-      config = require('config.ultisnips')
+      {
+        'mfussenegger/nvim-dap',
+        config = require('config.nvim-dap')
+      },
+      {
+        'rcarriga/nvim-dap-ui',
+        config = require('config.dap-ui')
+      }
     }
+    -- Snippets
+    use { 'SirVer/ultisnips', config = require('config.ultisnips') }
+    -- TODO(alucbert): ultisnips -> luasnip ?
+    -- use { 'L3MON4D3/LuaSnip', config = require('config.luasnip') }
     -- Highlighting
     use {
       {
@@ -101,12 +112,10 @@ return require('packer').startup({
       config = require('config.vim-stay')
     }
     use 'tomtom/tcomment_vim'        -- Commenting and uncommenting bindings
-    use 'ahmedkhalf/lsp-rooter.nvim' -- `cd` to the LSP root
     use {
       "airblade/vim-rooter",         -- `cd` to an identified root directory
       config = require('config.vim-rooter')
     }
-    use 'ellisonleao/glow.nvim'
     use {
       'iamcco/markdown-preview.nvim', -- Preview markdown in the browser
       config = require('config.markdown-preview')

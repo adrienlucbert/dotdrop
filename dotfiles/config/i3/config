@@ -32,8 +32,10 @@ default_floating_border pixel 0
 # exec --no-startup-id nm-applet
 
 exec --no-startup-id ~/.config/autostart.sh &
+exec --no-startup-id ~/.config/i3/scripts/fix-unity-redraw.sh &
 
 # Use pactl to adjust volume in PulseAudio.
+set $unity-refresh exec i3-msg [class="Unity"] fullscreen toggle; exec i3-msg [class="Unity"] fullscreen toggle
 set $refresh_i3status killall -SIGUSR1 i3status
 # bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
 # bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status

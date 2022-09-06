@@ -14,7 +14,7 @@ super + Return
 
 # launch browser
 super + w
-  brave
+  google-chrome
 
 # launch file explorer
 super + e
@@ -60,15 +60,15 @@ XF86AudioMute
 
 # raise/lower volume
 XF86Audio{Raise,Lower}Volume
-  amixer set Master {10%+,10%-} unmute
+  amixer set Master {5%+,5%-} unmute
 
 # raise laptop brightness
 XF86MonBrightnessUp
-  xbacklight -inc 10
+  xbacklight -inc 5
 
 # lower laptop brightness
 XF86MonBrightnessDown
-  xbacklight -dec 10
+  xbacklight -dec 5
 
 # raise global brightness
 shift + XF86MonBrightnessUp

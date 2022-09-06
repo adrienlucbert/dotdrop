@@ -2,6 +2,13 @@
 ### [i] = expand snippet regardless of preceding characters
 
 snippet main "standard main" b
+int main()
+{
+	${0}
+}
+endsnippet
+
+snippet fmain "full main" b
 int main(int argc, char const* const* argv)
 {
 	${0}
@@ -9,6 +16,11 @@ int main(int argc, char const* const* argv)
 endsnippet
 
 ## Preprocessor
+snippet prag "prama once" bA
+#pragma once
+
+endsnippet
+
 snippet inc "system include" bA
 #include <${1}>
 endsnippet
@@ -31,15 +43,13 @@ snippet class "Copelian class" b
 class ${1}
 {
 public:
-	$1();
-	$1($1 const& b);
+	$1() noexcept;
+	$1($1 const& b) noexcept;
 	$1($1&& b) noexcept;
 	~$1() noexcept;
 
-	$1& operator=($1 const& rhs);
+	$1& operator=($1 const& rhs) noexcept;
 	$1& operator=($1&& rhs) noexcept;
-
-private:
 };
 endsnippet
 
@@ -49,14 +59,12 @@ class ${1}
 {
 public:
 	$1() noexcept = default;
-	$1($1 const& b) noexcept = default;
-	$1($1&& b) noexcept = default;
+	$1($1 const&) noexcept = default;
+	$1($1&&) noexcept = default;
 	~$1() noexcept = default;
 
-	$1& operator=($1 const& rhs) noexcept = default;
-	$1& operator=($1&& rhs) noexcept = default;
-
-private:
+	$1& operator=($1 const&) noexcept = default;
+	$1& operator=($1&&) noexcept = default;
 };
 endsnippet
 
@@ -107,8 +115,9 @@ snippet ns "namespace" bA
 namespace ${1}
 {
 ${0}
-}
+} //
 endsnippet
+
 snippet ans "anonymous namespace" bA
 namespace
 {
@@ -168,93 +177,6 @@ static auto const* digits = "0123456789ABCDEF";
 for (auto const byte : ${1})
 	std::cout << digits[byte >> 4] << digits[byte & 0xF] << ' ';
 std::cout << std::endl;
-endsnippet
-
-snippet vdmsgh "VoxDei message header" b
-#ifndef NETWORK_MESSAGES_${1}_HH_
-#define NETWORK_MESSAGES_$1_HH_
-
-#include <Common/Types.hh>
-#include <Network/MessagesGroup.hh>
-#include <Network/Types.hh>
-#include <Network/VDSocket.hpp>
-
-namespace VoxDei
-{
-class Client;
-
-namespace Network
-{
-namespace Messages
-{
-class ${2}
-{
-public:
-	static constexpr auto const OPCODE = Opcode{0x$3};
-	static constexpr auto const GROUPTYPE = GroupType::${4:Guaranteed};
-
-	explicit $2($5) noexcept;
-	$2($2 const& b) = default;
-	$2($2&& b) noexcept = default;
-	~$2() noexcept = default;
-
-	$2& operator=($2 const& rhs) = default;
-	$2& operator=($2&& rhs) noexcept = default;
-
-	template <typename T>
-	void writeTo(VDStream<T>& sock) const;
-
-	${6:static MessagesGroupData process(MessagesGroupData group, Client& cl);}
-
-private:
-	${7}
-};
-
-template <typename T>
-void $2::writeTo(VDStream<T>& sock) const
-{
-	sock.addMessage(GROUPTYPE, OPCODE);
-	${8}
-}${0}
-}
-}
-}
-
-#endif /* !NETWORK_MESSAGES_$1_HH_ */
-endsnippet
-snippet vdmsgc "VoxDei message source" b
-#include <Network/Messages/${1}.hh>
-
-#include <Client.hh>
-#include <Network/Utils.hh>
-#include <Server.hh>
-
-namespace VoxDei
-{
-namespace Network
-{
-namespace Messages
-{
-constexpr Opcode const $1::OPCODE;
-constexpr GroupType const $1::GROUPTYPE;
-
-$1::$1(${2}) noexcept ${3}
-{
-}
-
-MessagesGroupData $1::process(MessagesGroupData group, Client& cl)
-{
-	assert(!group.empty());
-	assert(Opcode{group[0]} == OPCODE);
-
-	if ((unsigned)group.size() < ${4})
-		throw IllformedPacketException("Invalid $1 message");
-	${0}
-	// return group.subspan(5);
-}
-}
-}
-}
 endsnippet
 
 snippet dpar "Default ctor param" i

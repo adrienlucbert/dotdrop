@@ -3,10 +3,13 @@ return function()
 
   map('n', '<C-b>', ':NvimTreeToggle<CR>')
 
-  vim.g.nvim_tree_highlight_opened_files = 3
-  vim.g.nvim_tree_indent_markers = 1
-
-  require'nvim-tree'.setup {
+  require 'nvim-tree'.setup {
+    renderer = {
+      highlight_opened_files = "name",
+      indent_markers = {
+        enable = true
+      }
+    },
     open_on_tab = true,
     update_focused_file = {
       enable = true
@@ -18,7 +21,8 @@ return function()
         '*.o',
         'node_modules',
         '.cache',
-        'build'
+        'build',
+        '*.meta'
       }
     },
     diagnostics = {

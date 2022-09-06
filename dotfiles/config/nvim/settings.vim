@@ -1,6 +1,11 @@
 syntax enable
 filetype plugin indent on
 
+" Variables ------------------------------------------------------------------
+
+let g:python_host_prog = '/usr/bin/python2'
+let g:python3_host_prog = '/usr/bin/python3'
+
 " GUI ------------------------------------------------------------------------
 
 colorscheme jellybeans

@@ -78,6 +78,10 @@ alias dotdrop="DOTDROP_CONFIG=$HOME/dotdrop/dotdrop/config.yaml dotdrop"
 alias luamake=/home/alucbert/install/lua-language-server/3rd/luamake/luamake
 
 # ---- Programs configuration and custom commands ----
+# cmake() {
+#   /usr/bin/cmake $1 -GNinja -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ ${@:2}
+# }
+
 visum() {
   bash /usr/share/visum/scripts/visum.sh $@
 }

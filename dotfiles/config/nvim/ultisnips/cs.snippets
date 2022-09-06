@@ -1,0 +1,55 @@
+snippet sdoc "Method short documentation" [bA]
+/// <summary>
+/// $1
+/// </summary>
+endsnippet
+
+snippet doc "Method documentation" [bA]
+/// <summary>
+/// $1
+/// </summary>
+/// <param name="$2">$3</param>
+/// <returns>$4</returns>
+endsnippet
+
+snippet ns "namespace" [bA]
+namespace $1
+{
+		$0
+}
+endsnippet
+
+snippet class "Class" [bA]
+${1:public} class $2
+{
+		$0
+}
+endsnippet
+
+snippet interf "Interface" [bA]
+${1:public} interface $2
+{
+		$0
+}
+endsnippet
+
+snippet abst "Abstract class" [bA]
+${1:public} abstract class $2
+{
+		$0
+}
+endsnippet
+
+snippet state "State class" [bA]
+${2:public} class $3 : AState<$4>
+{
+    override public void Update()
+    {
+        $0
+    }
+}
+endsnippet
+
+snippet log "Debug log" [bA]
+Debug.Log($"$1");
+endsnippet

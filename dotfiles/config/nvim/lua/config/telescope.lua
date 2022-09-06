@@ -16,7 +16,10 @@ return function ()
       file_ignore_patterns = {
         'deps/.*',
         '.git',
-        'node_modules'
+        'node_modules',
+        '.cache',
+        'build',
+        '*.meta'
       },
     },
     extensions = {

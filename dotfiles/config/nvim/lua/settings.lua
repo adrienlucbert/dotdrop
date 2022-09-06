@@ -4,3 +4,10 @@ vim.cmd('  autocmd!')
 vim.cmd('  autocmd BufWritePost ~/.config/nvim/** :so $MYVIMRC')
 vim.cmd('  autocmd BufWritePost ~/.config/nvim/** :PackerCompile')
 vim.cmd('augroup END')
+
+-- reload buffer if it was modified outside of nvim
+vim.cmd('augroup autoreload')
+vim.cmd('  autocmd!')
+vim.cmd('  autocmd FocusGained * checktime')
+vim.cmd('  autocmd CursorHold * checktime')
+vim.cmd('augroup END')

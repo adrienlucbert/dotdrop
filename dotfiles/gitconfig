@@ -25,3 +25,13 @@
     diffFilter = delta --color-only
 [init]
 	defaultBranch = main
+[core]
+	excludesfile = /home/alucbert/.gitignore
+[url "git@github.com:"]
+	insteadOf = git://github.com/
+[pull]
+	rebase = true
+[fetch]
+	prune = true
+[diff]
+	colorMoved = zebra

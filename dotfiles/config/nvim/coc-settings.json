@@ -6,7 +6,7 @@
         "--background-index",
         "--clang-tidy",
         "--all-scopes-completion",
-        "--completion-style=detailed",
+        "--completion-style=detailed"
       ],
       "filetypes": [
         "c",

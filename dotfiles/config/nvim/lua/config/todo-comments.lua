@@ -49,3 +49,9 @@ return function()
     },
   }
 end
+
+-- TODO(alucbert):
+-- HACK: beware
+-- WARN: alert
+-- PERF: gotta go fast
+-- INFO: text

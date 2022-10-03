@@ -10,8 +10,8 @@ return function()
       edit = "e",
       repl = "r",
     },
-    layouts = {
-      {
+    layout = {
+      sidebar = {
         -- You can change the order of elements in the sidebar
         elements = {
           -- Provide as ID strings or tables with "id" and "size" keys
@@ -26,7 +26,7 @@ return function()
         size = 40,
         position = "left", -- Can be "left", "right", "top", "bottom"
       },
-      {
+      tray = {
         elements = { "repl" },
         size = 10,
         position = "bottom", -- Can be "left", "right", "top", "bottom"

@@ -1,11 +1,6 @@
 syntax enable
 filetype plugin indent on
 
-" Variables ------------------------------------------------------------------
-
-let g:python_host_prog = '/usr/bin/python2'
-let g:python3_host_prog = '/usr/bin/python3'
-
 " GUI ------------------------------------------------------------------------
 
 colorscheme jellybeans
@@ -23,6 +18,7 @@ set splitbelow
 set signcolumn=yes
 set cursorline
 set nofoldenable
+set mouse= " disable mouse click navigation
 highlight Pmenu ctermbg=none guibg=none
 highlight PmenuSel ctermbg=darkgray guibg=darkgray
 highlight PmenuSbar ctermbg=gray guibg=gray

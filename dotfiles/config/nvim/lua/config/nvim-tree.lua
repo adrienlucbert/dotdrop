@@ -4,15 +4,15 @@ return function()
   map('n', '<C-b>', ':NvimTreeToggle<CR>')
 
   require 'nvim-tree'.setup {
-    renderer = {
-      highlight_opened_files = "name",
-      indent_markers = {
-        enable = true
-      }
-    },
     open_on_tab = true,
     update_focused_file = {
       enable = true
+    },
+    renderer = {
+      highlight_opened_files = 'all',
+      indent_markers = {
+        enable = true
+      },
     },
     filters = {
       dotfiles = true,
@@ -21,8 +21,7 @@ return function()
         '*.o',
         'node_modules',
         '.cache',
-        'build',
-        '*.meta'
+        'build'
       }
     },
     diagnostics = {

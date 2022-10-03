@@ -5,12 +5,12 @@ local fn = vim.fn
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 
 if fn.empty(fn.glob(install_path)) > 0 then
-  fn.system({ 'git', 'clone', 'https://github.com/wbthomason/packer.nvim', '--depth', '1', install_path })
+  fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', '--depth', '1', install_path})
   execute 'packadd packer.nvim'
 end
 
 return require('packer').startup({
-  function(use)
+  function (use)
     -- Plugin manager
     use 'wbthomason/packer.nvim'
 
@@ -22,10 +22,6 @@ return require('packer').startup({
       'vim-airline/vim-airline',
       requires = 'vim-airline/vim-airline-themes',
       config = require('config.vim-airline')
-    }
-    use {
-      'Pocco81/true-zen.nvim',
-      config = require('config.true-zen')
     }
 
     -- LSP
@@ -110,23 +106,20 @@ return require('packer').startup({
     }
 
     -- Misc
-    use 'rbgrouleff/bclose.vim' -- Close a buffer without closing the window
+    use 'rbgrouleff/bclose.vim'       -- Close a buffer without closing the window
     use {
-      'vim-scripts/vim-stay', -- Open a previously closed file where you left it
+      'vim-scripts/vim-stay',        -- Open a previously closed file where you left it
       config = require('config.vim-stay')
     }
-    use 'tomtom/tcomment_vim' -- Commenting and uncommenting bindings
+    use 'tomtom/tcomment_vim'        -- Commenting and uncommenting bindings
     use {
-      "airblade/vim-rooter", -- `cd` to an identified root directory
+      "airblade/vim-rooter",         -- `cd` to an identified root directory
       config = require('config.vim-rooter')
     }
     use {
       'iamcco/markdown-preview.nvim', -- Preview markdown in the browser
       config = require('config.markdown-preview')
     }
-    -- use {
-    --   "gpanders/editorconfig.nvim" -- Support for .editorconfig files
-    -- }
 
     -- Search & replace
     use 'tpope/vim-abolish'

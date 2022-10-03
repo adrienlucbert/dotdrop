@@ -16,10 +16,7 @@ return function ()
       file_ignore_patterns = {
         'deps/.*',
         '.git',
-        'node_modules',
-        '.cache',
-        'build',
-        '*.meta'
+        'node_modules'
       },
     },
     extensions = {
@@ -36,5 +33,5 @@ return function ()
   telescope.load_extension('fzf_writer')
 
   map('n', '<C-p>', ':lua require\'telescope.builtin\'.find_files()<CR>')
-  -- map('n', '<C-j>', ':lua require(\'telescope.builtin\').live_grep()<CR>')
+  map('n', '<C-j>', ':lua require(\'telescope.builtin\').live_grep()<CR>')
 end

@@ -1,4 +1,4 @@
-return function ()
+return function()
   vim.g.mkdp_auto_start = false
   vim.g.mkdp_auto_close = true
   vim.g.mkdp_refresh_slow = false

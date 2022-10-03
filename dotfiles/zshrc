@@ -66,6 +66,7 @@ alias lines='cloc --exclude-dir=build,deps --exclude-ext=json .'
 alias fixbt="pacmd set-card-profile bluez_card.70_BF_92_01_DB_57 a2dp_sink"
 alias btctl="bluetoothctl"
 
+alias jq="jq -C"
 alias cp="rsync -az --info=progress2 --no-inc-recursive" 
 
 alias colortest="npx colortest"
@@ -85,6 +86,8 @@ alias luamake=/home/alucbert/install/lua-language-server/3rd/luamake/luamake
 visum() {
   bash /usr/share/visum/scripts/visum.sh $@
 }
+
+ASDF_SRC=/opt/asdf-vm/asdf.sh [ -f $ASDF_SRC ] && source $ASDF_SRC
 
 ## conda
 __conda_setup="$('/opt/anaconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"

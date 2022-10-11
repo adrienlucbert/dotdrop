@@ -87,6 +87,8 @@ dotfiles:
   d_config_nvim:
     src: config/nvim
     dst: ~/.config/nvim
+    upignore:
+    - '*/plugin/packer_compiled.lua'
   d_config_picom:
     src: config/picom
     dst: ~/.config/picom

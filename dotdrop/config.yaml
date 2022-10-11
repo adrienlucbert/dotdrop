@@ -137,6 +137,12 @@ dotfiles:
     src: var/spool/cron/alucbert
     dst: /var/spool/cron/alucbert
     chmod: '600'
+  f_etc_lightdm_lightdm.conf:
+    src: etc/lightdm/lightdm.conf
+    dst: /etc/lightdm/lightdm.conf
+  f_etc_lightdm_lightdm-gtk-greeter.conf:
+    src: etc/lightdm/lightdm-gtk-greeter.conf
+    dst: /etc/lightdm/lightdm-gtk-greeter.conf
 profiles:
   tty:
     actions:
@@ -187,3 +193,5 @@ profiles:
     - f_config_systemd_user_spotifyd.service
     - f_local_bin_unity-editor_code
     - d_config_nvim
+    - f_etc_lightdm_lightdm.conf
+    - f_etc_lightdm_lightdm-gtk-greeter.conf

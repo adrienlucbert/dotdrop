@@ -131,6 +131,10 @@ dotfiles:
     src: local/bin/unity-editor/code
     dst: ~/.local/bin/unity-editor/code
     chmod: '755'
+  f_var_spool_cron_alucbert:
+    src: var/spool/cron/alucbert
+    dst: /var/spool/cron/alucbert
+    chmod: '600'
 profiles:
   tty:
     actions:
@@ -148,6 +152,7 @@ profiles:
     - f_gitconfig
     - f_etc_paru.conf
     - f_etc_pacman.conf
+    - f_var_spool_cron_alucbert
   gui:
     include:
     - tty

@@ -23,6 +23,10 @@ return require('packer').startup({
       requires = 'vim-airline/vim-airline-themes',
       config = require('config.vim-airline')
     }
+    -- use {
+    --   'Pocco81/true-zen.nvim',
+    --   config = require('config.true-zen')
+    -- }
 
     -- LSP
     use { 'hrsh7th/cmp-nvim-lsp' }
@@ -124,6 +128,9 @@ return require('packer').startup({
       'iamcco/markdown-preview.nvim', -- Preview markdown in the browser
       config = require('config.markdown-preview')
     }
+    -- use {
+    --   "gpanders/editorconfig.nvim" -- Support for .editorconfig files
+    -- }
 
     -- Search & replace
     use 'tpope/vim-abolish'

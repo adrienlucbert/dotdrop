@@ -5,6 +5,14 @@ export PATH="$PATH:/home/alucbert/.dotnet/tools"
 export PATH="$PATH:/home/alucbert/.local/share/gem/ruby/3.0.0/bin"
 export PATH="$PATH:/home/alucbert/perl5/bin"
 
+# ---- Android stuff ----
+export JAVA_HOME=/usr/lib/jvm/default
+export ANDROID_HOME=/opt/android-sdk
+export ANDROID_NDK_ROOT=/opt/android-ndk
+export ANDROID_SDK_ROOT=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
+export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
+
 # ---- Misc environment ----
 export ZSH="/home/alucbert/.oh-my-zsh"
 export EDITOR=nvim

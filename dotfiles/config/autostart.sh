@@ -35,8 +35,8 @@ run() {
 ##### Autostart {{{
 
   # Status bar
-  # run "polybar" ~/.config/polybar/launch.sh
-  run "" i3status
+  run "polybar" ~/.config/polybar/launch.sh
+  # run "" i3status
 
   # Better key autorepeat rate
   run "" xset r rate 200 50
@@ -58,7 +58,7 @@ run() {
   # run "xcompngr" xcompmgr;
 
   # Network manager applet
-  once "nm-applet" nm-applet
+  # once "nm-applet" nm-applet
 
   # Bluetooth applet
   once "blueman-applet" blueman-applet

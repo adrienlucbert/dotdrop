@@ -143,6 +143,14 @@ dotfiles:
   f_etc_lightdm_lightdm-gtk-greeter.conf:
     src: etc/lightdm/lightdm-gtk-greeter.conf
     dst: /etc/lightdm/lightdm-gtk-greeter.conf
+  f_local_bin_qqr:
+    src: local/bin/qqr
+    dst: ~/.local/bin/qqr
+    chmod: '755'
+  f_local_bin_clipqqr:
+    src: local/bin/clipqqr
+    dst: ~/.local/bin/clipqqr
+    chmod: '755'
 profiles:
   tty:
     actions:
@@ -195,3 +203,5 @@ profiles:
     - d_config_nvim
     - f_etc_lightdm_lightdm.conf
     - f_etc_lightdm_lightdm-gtk-greeter.conf
+    - f_local_bin_qqr
+    - f_local_bin_clipqqr

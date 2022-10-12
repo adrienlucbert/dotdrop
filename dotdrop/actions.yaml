@@ -1,7 +1,10 @@
 actions:
   pre:
-    install_ohmyzsh: ./dotdrpo/scripts/install_ohmyzsh.sh
-    vim_install_packer: ./dotdrpo/scripts/nvim_install_packer.sh
+    install_paru: ./dotdrop/scripts/install_paru.sh
+    install_arch_tty_packages: ./dotdrop/scripts/install_packages.sh ./packages/arch/packages ./packages/arch/packages.aur
+    install_arch_gui_packages: ./dotdrop/scripts/install_packages.sh ./packages/arch/packages.gui ./packages/arch/packages.aur.gui
+    install_ohmyzsh: ./dotdrop/scripts/install_ohmyzsh.sh
+    vim_install_packer: ./dotdrop/scripts/nvim_install_packer.sh
     vim_install_language_servers: ./dotdrop/scripts/install_language_servers.sh
   post:
     set_wallpaper: ~/.local/bin/chwp {{@@ wallpaper_name @@}}

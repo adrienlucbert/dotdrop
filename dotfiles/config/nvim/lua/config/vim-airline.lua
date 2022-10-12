@@ -1,6 +1,4 @@
--- This dotfile is managed using dotdrop
-
-return function ()
+return function()
   vim.cmd('let g:airline#extensions#tabline#enabled = 1')
   vim.cmd('let g:airline#extensions#tabline#buffer_idx_mode = 1')
   vim.cmd('let g:airline#extensions#tabline#tab_nr_type = 1')

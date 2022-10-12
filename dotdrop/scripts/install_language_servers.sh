@@ -3,13 +3,13 @@
 # Install language server for neovim
 
 # Json
-npm i -g vscode-json-languageserver
+which vscode-json-languageserver || npm i -g vscode-json-languageserver
 
 # Bash
-npm i -g bash-language-server
+which bash-language-server || npm i -g bash-language-server
 
 # Yaml
-npm i -g yaml-language-server
+which yaml-language-server || npm i -g yaml-language-server
 
 # Typescript
-npm i -g typescript-language-server
+which typescript-language-server || npm i -g typescript-language-server

@@ -9,7 +9,7 @@ wps_dir="$HOME/.config/wallpapers"
 
 ln -fs $wps_dir/$wp $HOME/.wall
 feh --bg-fill $HOME/.wall
-betterlockscreen -u $HOME/.wall -b 2
+betterlockscreen -u $HOME/.wall
 
 #[ $(id -u) -ne 0 ] && >&2 echo "Please run as root" && exit 1
 #cp $HOME/.cache/i3lock/current/dimblur.png /usr/share/sddm/themes/firark/Assets/background.png

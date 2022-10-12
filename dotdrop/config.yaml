@@ -152,6 +152,25 @@ dotfiles:
     dst: ~/.local/bin/clipqqr
     chmod: '755'
 profiles:
+  root-tty:
+    actions:
+    - vim_install_language_servers
+    - install_paru
+    - install_arch_tty_packages
+    dotfiles:
+    - f_etc_paru.conf
+    - f_etc_pacman.conf
+  root-gui:
+    include:
+    - root-tty
+    actions:
+    - install_arch_gui_packages
+    dotfiles:
+    - f_var_spool_cron_alucbert
+    - d_etc_x11_xorg.conf.d
+    - d_etc_udev_rules.d
+    - f_etc_lightdm_lightdm.conf
+    - f_etc_lightdm_lightdm-gtk-greeter.conf
   tty:
     actions:
     - install_ohmyzsh
@@ -166,9 +185,6 @@ profiles:
     - f_bash_profile
     - d_config_nvim
     - f_gitconfig
-    - f_etc_paru.conf
-    - f_etc_pacman.conf
-    - f_var_spool_cron_alucbert
   gui:
     include:
     - tty
@@ -195,13 +211,9 @@ profiles:
     - d_config_sxhkd
     - d_config_wallpapers
     - f_config_autostart.sh
-    - d_etc_udev_rules.d
-    - d_etc_x11_xorg.conf.d
     - f_config_spotifyd_spotifyd.conf_1
     - f_config_systemd_user_spotifyd.service
     - f_local_bin_unity-editor_code
     - d_config_nvim
-    - f_etc_lightdm_lightdm.conf
-    - f_etc_lightdm_lightdm-gtk-greeter.conf
     - f_local_bin_qqr
     - f_local_bin_clipqqr

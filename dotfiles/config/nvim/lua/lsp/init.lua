@@ -44,6 +44,7 @@ return function()
     { name = 'clangd' },
     { name = 'cmake' },
     { name = 'bashls' },
+    { name = 'jsonls' },
   }
 
   vim.lsp.protocol.CompletionItemKind = {

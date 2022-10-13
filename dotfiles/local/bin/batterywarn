@@ -9,8 +9,14 @@ function notify_send() {
   sudo -u $user DISPLAY=$display DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$uid/bus notify-send "$@"
 }
 
+LOCKFOLDER=$HOME/.cache/batterywarn/
+LOCKFILE=$LOCKFOLDER/lock
 BATTINFO=`acpi -b`
-THRESHOLD="00:20:00"
+THRESHOLD="00:30:00"
 if [[ `echo $BATTINFO | grep Discharging` && `echo $BATTINFO | cut -f 5 -d " "` < $THRESHOLD ]]; then
+  [ -e $LOCKFILE ] && exit 0
+  mkdir -p $LOCKFOLDER && touch $LOCKFILE
   notify_send -u critical "Low battery" "$BATTINFO"
+else
+  rm $LOCKFILE
 fi

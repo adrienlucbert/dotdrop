@@ -27,3 +27,7 @@ map('n', 'Q', '<Nop>')
 -- Moving lines
 map('v', 'J', ":m '>+1<CR>gv=gv")
 map('v', 'K', ":m '<-2<CR>gv=gv")
+
+-- Folds
+map('n', '<Space>', 'za')
+map('n', '<S-Space>', 'zA')

@@ -3,7 +3,28 @@ return function()
 
   local utils = require('utils')
 
-  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+  capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true,
+  }
+
+  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+    underline = true,
+    update_in_insert = false,
+    virtual_text = {
+      prefix = ''
+    },
+  })
+
+  vim.fn.sign_define('LspDiagnosticsSignError', { text = ' ', texthl = 'LspDiagnosticsSignError' })
+  vim.fn.sign_define('LspDiagnosticsSignWarning', { text = ' ', texthl = 'LspDiagnosticsSignWarning' })
+  vim.fn.sign_define('LspDiagnosticsSignInformation', { text = ' ', texthl = 'LspDiagnosticsSignInformation' })
+  vim.fn.sign_define('LspDiagnosticsSignHint', { text = ' ', texthl = 'LspDiagnosticsSignHint' })
+
   local make_on_attach = function(ls_on_attach, options)
     return function(client, bufnr)
       local function buf_set_keymap(...) utils.buf_map(bufnr, ...) end
@@ -15,12 +36,11 @@ return function()
       buf_set_keymap('n', '<leader>r', '<cmd>lua vim.lsp.buf.references()<CR>')
       buf_set_keymap('n', '<leader>yd', '<cmd>lua vim.lsp.buf.document_symbol()<CR>')
       buf_set_keymap('n', '<leader>yw', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>')
-      buf_set_keymap('n', '<C-c>', '<cmd>lua vim.lsp.buf.code_action()<CR>')
+      buf_set_keymap('n', '<C-c>', '<cmd>CodeActionMenu<CR>')
       buf_set_keymap('n', 'L', '<cmd>lua vim.diagnostic.open_float()<CR>')
       buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.rename()<CR>')
 
       local formatting = options == nil or options.disable_formatting ~= true
-
       if formatting and client.server_capabilities.documentFormattingProvider then
         vim.cmd 'autocmd BufWritePre <buffer> lua vim.lsp.buf.format { async = false }'
       end
@@ -74,30 +94,6 @@ return function()
     "   (Operator)",
     "   (TypeParameter)"
   }
-
-  capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics, {
-    underline = true,
-    update_in_insert = false,
-    virtual_text = {
-      prefix = ' '
-    },
-  }
-  )
-
-  vim.lsp.handlers['textDocument/codeAction'] = require 'lsputil.codeAction'.code_action_handler
-
-  vim.fn.sign_define('LspDiagnosticsSignError',
-    { text = ' ', texthl = 'LspDiagnosticsSignError' })
-  vim.fn.sign_define('LspDiagnosticsSignWarning',
-    { text = ' ', texthl = 'LspDiagnosticsSignWarning' })
-  vim.fn.sign_define('LspDiagnosticsSignInformation',
-    { text = ' ', texthl = 'LspDiagnosticsSignInformation' })
-  vim.fn.sign_define('LspDiagnosticsSignHint',
-    { text = ' ', texthl = 'LspDiagnosticsSignHint' })
-
 
   for _, server in ipairs(servers) do
     lsp[server.name].setup {

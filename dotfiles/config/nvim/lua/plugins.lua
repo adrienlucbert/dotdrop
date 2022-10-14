@@ -33,10 +33,8 @@ return require('packer').startup({
     use {
       'neovim/nvim-lspconfig',
       requires = {
-        {
-          'RishabhRD/nvim-lsputils',
-          requires = 'RishabhRD/popfix',
-        },
+        { 'RishabhRD/nvim-lsputils', requires = 'RishabhRD/popfix' },
+        { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' },
       },
       config = require('lsp'),
     }

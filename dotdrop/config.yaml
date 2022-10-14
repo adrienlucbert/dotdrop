@@ -78,6 +78,9 @@ dotfiles:
   d_config_polybar:
     src: config/polybar
     dst: ~/.config/polybar
+  f_config_polybar_modules_vpn.ini:
+    src: config/polybar/modules/vpn.ini
+    dst: ~/.config/polybar/modules/vpn.ini
   d_config_dunst:
     src: config/dunst
     dst: ~/.config/dunst
@@ -152,6 +155,18 @@ dotfiles:
     dst: ~/.local/bin/clipqqr
     chmod: '755'
 profiles:
+  home:
+    include:
+    - gui
+
+  work:
+    variables:
+      use_vpn: true
+    include:
+    - gui
+    dotfiles:
+    - f_config_polybar_modules_vpn.ini
+
   root-tty:
     actions:
     - vim_install_language_servers
@@ -160,6 +175,7 @@ profiles:
     dotfiles:
     - f_etc_paru.conf
     - f_etc_pacman.conf
+
   root-gui:
     include:
     - root-tty
@@ -171,6 +187,7 @@ profiles:
     - d_etc_udev_rules.d
     - f_etc_lightdm_lightdm.conf
     - f_etc_lightdm_lightdm-gtk-greeter.conf
+
   tty:
     actions:
     - install_ohmyzsh
@@ -185,6 +202,7 @@ profiles:
     - f_bash_profile
     - d_config_nvim
     - f_gitconfig
+
   gui:
     include:
     - tty

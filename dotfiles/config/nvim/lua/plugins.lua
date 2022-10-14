@@ -124,6 +124,7 @@ return require('packer').startup({
     }
     use {
       'iamcco/markdown-preview.nvim', -- Preview markdown in the browser
+      run = function() vim.fn["mkdp#util#install"]() end, -- https://github.com/iamcco/markdown-preview.nvim/issues/506
       config = require('config.markdown-preview')
     }
     -- use {

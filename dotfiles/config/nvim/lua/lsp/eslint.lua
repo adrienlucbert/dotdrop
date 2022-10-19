@@ -37,4 +37,7 @@ return {
       mode = 'location',
     },
   },
+  on_attach_options = {
+    disable_formatting = true
+  }
 }

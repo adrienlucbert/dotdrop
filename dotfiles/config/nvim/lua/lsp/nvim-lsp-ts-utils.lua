@@ -44,5 +44,8 @@ return {
 
     -- required to fix code action ranges and filter diagnostics
     ts_utils.setup_client(client)
-  end
+  end,
+  on_attach_options = {
+    disable_formatting = true
+  }
 }

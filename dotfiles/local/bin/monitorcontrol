@@ -56,13 +56,15 @@ function arrange_monitors {
 }
 
 function choose_preset {
-    choices=( $(ls "${config_dir}/presets") )
+    presets_dir="$HOME/.screenlayout"
+    echo $presets_dir
+    choices=( $(ls $presets_dir) )
     choice=$(printf '%s\n' "${choices[@]}" | rofi -dmenu)
 
     if [ -z "$choice" ]; then
         exit
     fi
-    sh -c "$(cat ${config_dir}/presets/${choice})"
+    sh -c "$(cat $presets_dir/$choice)"
     reload_wm 
 }
 

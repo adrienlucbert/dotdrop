@@ -154,6 +154,9 @@ dotfiles:
     src: local/bin/clipqqr
     dst: ~/.local/bin/clipqqr
     chmod: '755'
+  d_screenlayout:
+    src: screenlayout
+    dst: ~/.screenlayout
 profiles:
   home:
     include:
@@ -235,3 +238,4 @@ profiles:
     - d_config_nvim
     - f_local_bin_qqr
     - f_local_bin_clipqqr
+    - d_screenlayout

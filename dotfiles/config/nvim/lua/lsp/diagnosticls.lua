@@ -12,9 +12,9 @@ return {
       eslint = {
         sourceName = "eslint",
         command = "eslint_d",
-        rootPatterns = {".eslintrc.js", "package.json"},
+        rootPatterns = { ".eslintrc.js", "package.json" },
         debounce = 100,
-        args = {"--stdin", "--stdin-filename", "%filepath", "--format", "json"},
+        args = { "--stdin", "--stdin-filename", "%filepath", "--format", "json" },
         parseJson = {
           errorsRoot = "[0].messages",
           line = "line",
@@ -24,15 +24,19 @@ return {
           message = "${message} [${ruleId}]",
           security = "severity"
         },
-        securities = {[2] = "error", [1] = "warning"}
+        securities = { [2] = "error", [1] = "warning" }
       }
     },
     formatters = {
-    prettier = {
-      command = "prettier", args = {"--stdin-filepath", "%filepath"}}
+      prettier = {
+        command = "prettier", args = { "--stdin-filepath", "%filepath" }
+      }
     },
     formatFiletypes = {
       typescript = "prettier"
     }
+  },
+  on_attach_options = {
+    disable_formatting = true
   }
 }

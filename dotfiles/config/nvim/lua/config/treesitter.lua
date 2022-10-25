@@ -1,4 +1,4 @@
-return function ()
+return function()
   require('nvim-treesitter.configs').setup {
     highlight = {
       enable = true,
@@ -20,6 +20,9 @@ return function ()
         goto_node = '<cr>',
         show_help = '?',
       },
-    }
+    },
+    matchup = {
+      enable = true,
+    },
   }
 end

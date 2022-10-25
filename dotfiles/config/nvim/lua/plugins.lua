@@ -110,6 +110,7 @@ return require('packer').startup({
       'ggandor/leap.nvim',
       config = require('config.leap')
     }
+    use 'andymass/vim-matchup'
 
     -- Misc
     use 'rbgrouleff/bclose.vim' -- Close a buffer without closing the window

@@ -17,7 +17,7 @@ set splitright
 set splitbelow
 set signcolumn=yes
 set cursorline
-set cmdheight=0
+" set cmdheight=0
 set mouse=c " disable mouse click navigation
 highlight Pmenu ctermbg=none guibg=none
 highlight PmenuSel ctermbg=darkgray guibg=darkgray

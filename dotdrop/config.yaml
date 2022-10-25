@@ -159,12 +159,15 @@ dotfiles:
     dst: ~/.screenlayout
 profiles:
   home:
+    variables:
+      email: adrien.lucbert@epitech.eu
     include:
     - gui
 
   work:
     variables:
       use_vpn: true
+      email: adrien.lucbert@kbrwadventure.com
     include:
     - gui
     dotfiles:

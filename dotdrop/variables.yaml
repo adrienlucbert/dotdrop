@@ -1,2 +1,4 @@
 variables:
   wallpaper_name: mountain.jpg
+  font: Iosevka Term Extended
+  font_bold: Iosevka Term Bold Extended

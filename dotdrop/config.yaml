@@ -157,6 +157,12 @@ dotfiles:
   d_screenlayout:
     src: screenlayout
     dst: ~/.screenlayout
+  f_iex.exs:
+    src: iex.exs
+    dst: ~/.iex.exs
+  d_iex.d:
+    src: iex.d
+    dst: ~/.iex.d
 profiles:
   home:
     variables:
@@ -172,7 +178,8 @@ profiles:
     - gui
     dotfiles:
     - f_config_polybar_modules_vpn.ini
-
+    - f_iex.exs
+    - d_iex.d
   root-tty:
     actions:
     - vim_install_language_servers

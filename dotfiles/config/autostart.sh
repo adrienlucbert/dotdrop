@@ -58,7 +58,7 @@ run() {
   # run "xcompngr" xcompmgr;
 
   # Network manager applet
-  # once "nm-applet" nm-applet
+  once "nm-applet" nm-applet
 
   # Bluetooth applet
   once "blueman-applet" blueman-applet

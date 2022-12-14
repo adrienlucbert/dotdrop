@@ -1,4 +1,4 @@
-return function ()
+return function()
   local map = require('utils').map
   local telescope = require('telescope')
 
@@ -21,9 +21,9 @@ return function ()
     },
     extensions = {
       fzf_writer = {
-          minimum_grep_characters = 0,
-          minimum_files_characters = 0,
-          use_highlighter = true,
+        minimum_grep_characters = 0,
+        minimum_files_characters = 0,
+        use_highlighter = true,
       },
     },
     mappings = {

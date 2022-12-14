@@ -65,6 +65,8 @@ return function()
     { name = 'cmake' },
     { name = 'bashls' },
     { name = 'jsonls' },
+    { name = 'gopls' },
+    { name = 'golangci_lint_ls' },
   }
 
   vim.lsp.protocol.CompletionItemKind = {

@@ -29,9 +29,11 @@ highlight PmenuThumb ctermbg=darkgray guibg=darkgray
 set clipboard=unnamedplus
 set tabstop=2
 set shiftwidth=2
-set smartindent
 set expandtab
+set autoindent
+set smartindent
 set noerrorbells
+set nofixeol noeol binary
 
 " Search ---------------------------------------------------------------------
 

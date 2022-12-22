@@ -15,8 +15,6 @@ map('n', '<leader>p', ':bprevious<CR>')
 
 -- Tabs
 map('n', 'T', ':tabnew<cr>')
-map('n', 'H', ':tabprev<cr>')
-map('n', 'L', ':tabnext<cr>')
 
 -- In visual block mode, enter insert mode with i instead of I
 map('x', 'i', 'I')
@@ -31,3 +29,10 @@ map('v', 'K', ":m '<-2<CR>gv=gv")
 -- Folds
 map('n', '<Space>', 'za')
 map('n', '<S-Space>', 'zA')
+
+
+-- Resize buffer size
+map('n', '<Up>', '<C-w>2-')
+map('n', '<Down>', '<C-w>2+')
+map('n', '<Left>', '<C-w>2<')
+map('n', '<Right>', '<C-w>2>')

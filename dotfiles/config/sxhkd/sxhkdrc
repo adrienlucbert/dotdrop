@@ -153,5 +153,14 @@ super + shift + {1-9,0}
 #super + {h,j,k,l}
 #  bspc node -v {-20 0,0 20,0 -20,20 0}
 
-super + b + t
-  export BT_DEVICE=`bluetoothctl info | head -n1 | cut -d' ' -f2`; bluetoothctl disconnect $BT_DEVICE && bluetoothctl connect $BT_DEVICE && pacmd set-card-profile "bluez_card.$BT_DEVICE" a2dp_sink
+# open TO-DO list in nvim
+super + t
+	kitty -e nvim ~/.notable/notes/Tasks.md
+
+# open Notable notes list in nvim
+super + n
+	kitty -e nvim ~/.notable/notes
+
+## reconnect currently connected bluetooth device
+# super + b + t
+#   export BT_DEVICE=`bluetoothctl info | head -n1 | cut -d' ' -f2`; bluetoothctl disconnect $BT_DEVICE && bluetoothctl connect $BT_DEVICE && pacmd set-card-profile "bluez_card.$BT_DEVICE" a2dp_sink

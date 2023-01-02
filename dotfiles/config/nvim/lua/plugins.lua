@@ -127,6 +127,7 @@ return require('packer').startup({
 			run = function() vim.fn["mkdp#util#install"]() end, -- https://github.com/iamcco/markdown-preview.nvim/issues/506
 			config = require('config.markdown-preview')
 		}
+		use 'AndrewRadev/linediff.vim'
 		-- use {
 		--   "gpanders/editorconfig.nvim" -- Support for .editorconfig files
 		-- }

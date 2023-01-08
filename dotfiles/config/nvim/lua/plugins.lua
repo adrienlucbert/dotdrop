@@ -106,7 +106,8 @@ return require('packer').startup({
 			requires = {
 				{ 'nvim-lua/popup.nvim' },
 				{ 'nvim-lua/plenary.nvim' },
-				{ 'nvim-telescope/telescope-fzf-writer.nvim' }
+				{ 'nvim-telescope/telescope-fzf-writer.nvim' },
+				{ 'otavioschwanck/telescope-alternate.nvim' },
 			},
 			config = require('config.telescope')
 		}

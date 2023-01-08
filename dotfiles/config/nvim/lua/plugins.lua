@@ -94,6 +94,10 @@ return require('packer').startup({
 
 		-- Project navigation
 		use { 'kyazdani42/nvim-tree.lua', config = require('config.nvim-tree') }
+		use {
+			'kevinhwang91/nvim-bqf',
+			config = require('config.nvim-bqf')
+		}
 
 		-- TODO: replace with https://github.com/vijaymarupudi/nvim-fzf
 		use {

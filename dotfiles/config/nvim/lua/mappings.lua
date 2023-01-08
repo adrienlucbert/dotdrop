@@ -36,3 +36,5 @@ map('n', '<Up>', '<C-w>2-')
 map('n', '<Down>', '<C-w>2+')
 map('n', '<Left>', '<C-w>2<')
 map('n', '<Right>', '<C-w>2>')
+
+require('qf').setup({ default_bindings = true })

@@ -155,11 +155,15 @@ super + shift + {1-9,0}
 
 # open TO-DO list in nvim
 super + t
-	kitty -e nvim ~/.notable/notes/Tasks.md
+	kitty -e nvim ~/.notable/notes/TODOs.md
 
 # open Notable notes list in nvim
 super + n
 	kitty -e nvim ~/.notable/notes
+
+# open Notable
+super + shift + n
+	notable
 
 ## reconnect currently connected bluetooth device
 # super + b + t

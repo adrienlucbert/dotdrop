@@ -86,6 +86,26 @@ alias dotdrop="DOTDROP_CONFIG=$HOME/dotdrop/dotdrop/config.yaml dotdrop"
 
 alias luamake=/home/alucbert/install/lua-language-server/3rd/luamake/luamake
 
+# confirm prompt
+confirm()
+{
+	printf "${1:-"Are you sure?"} [Y/n] " \
+	&& read confirm \
+	&& (
+		setopt -s nocasematch
+		[[ $confirm =~ ^((y(e|es)?)|)$ ]]
+	)
+}
+
+# open a temporary file in nvim with the given extension
+tmp()
+{
+	ext=${1:-md}
+	file=`mktemp --suffix=.$ext`
+	nvim $file && confirm "Delete buffer?" && rm $file || echo $file
+	
+}
+
 {%@@ if profile == "work" @@%}
 alias kbrw.start_endpoint='cd ~/projects/endpoint/endpoints && python3 -m  http.server 8000'
 

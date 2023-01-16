@@ -163,6 +163,10 @@ dotfiles:
   d_iex.d:
     src: iex.d
     dst: ~/.iex.d
+  f_local_bin_gitsync:
+    src: local/bin/gitsync
+    dst: ~/.local/bin/gitsync
+    chmod: '755'
 profiles:
   home:
     variables:
@@ -212,6 +216,7 @@ profiles:
     - f_bashrc
     - f_local_bin_a2ensite
     - f_local_bin_a2dissite
+    - f_local_bin_gitsync
     - f_bash_profile
     - d_config_nvim
     - f_gitconfig

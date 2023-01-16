@@ -1,0 +1,61 @@
+#!/usr/bin/sh
+
+usage_and_exit()
+{
+	2>&1 echo "USAGE: $0 [OPTION]... DIRECTORY"
+	2>&1 echo "Watch for changes in the DIRECTORY, and commit and push them."
+  2>&1 echo ""
+  2>&1 echo "
+-h, --help|print this help
+-f, --format <fmt>|describe commit messages format. Defaults to \"%d: %f\". The following conversions are supported
+|%f: Replaced by the name of the file modified
+|%e: Replaced by the event(s) which occurred (see EVENTS section of inotifywait(1))
+|%d: Replaced by the output of the \`date\` command
+" | column -t -s '|'
+	exit ${1:-1}
+}
+
+opt_format="%d: %f"
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -f|--format)
+      shift
+      opt_format="$1"
+			;;
+    -h|--help)
+      usage_and_exit 0
+      ;;
+    -*|--*)
+			2>&1 printf "Error: Unknown argument '$1'\n\n" && usage_and_exit 1
+      ;;
+    *)
+      break
+      ;;
+  esac
+  shift
+done
+
+if [[ $# -lt 1 ]]; then
+	2>&1 printf "Error: No target directory provided\n\n" && usage_and_exit 1
+fi
+
+for dir in "$@"; do
+	(
+		cd $dir
+		git pull -q
+	)
+done
+
+inotifywait -q -e close_write,delete --exclude "4913|\.git\/" -r $1 -m | while read -r directory events filename; do
+	(
+		msg="$opt_format"
+		msg="${msg//"%f"/"$filename"}"
+		msg="${msg//"%e"/"$events"}"
+		msg="${msg//"%d"/"`date`"}"
+		cd $directory
+		git add $filename
+		git commit -q -m $msg
+		git push
+	)
+done

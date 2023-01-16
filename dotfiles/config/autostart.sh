@@ -69,6 +69,9 @@ run() {
   # Hotkey daemon 
   run "sxhkd" sxhkd -c ~/.config/sxhkd/sxhkdrc
 
+	# Synchronize notable repository
+	run "" gitsync -f "%f" ~/.notable
+
 # }}}
 
 disown;

@@ -167,6 +167,10 @@ dotfiles:
     src: local/bin/gitsync
     dst: ~/.local/bin/gitsync
     chmod: '755'
+  f_lib_systemd_system-sleep_bluetooth.sh:
+    src: lib/systemd/system-sleep/bluetooth.sh
+    dst: /lib/systemd/system-sleep/bluetooth.sh
+    chmod: '755'
 profiles:
   home:
     variables:
@@ -254,3 +258,4 @@ profiles:
     - f_local_bin_qqr
     - f_local_bin_clipqqr
     - d_screenlayout
+    - f_lib_systemd_system-sleep_bluetooth.sh

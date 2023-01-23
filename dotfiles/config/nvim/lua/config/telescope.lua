@@ -36,5 +36,5 @@ return function()
 
 	map('n', '<C-p>', ':lua require\'telescope.builtin\'.find_files()<CR>')
 	map('n', '<C-j>', ':lua require(\'telescope.builtin\').live_grep()<CR>')
-	map('n', 'gt', ':Telescope telescope-alternate alternate_file<CR>')
+	map('n', 'ga', ':Telescope telescope-alternate alternate_file<CR>')
 end

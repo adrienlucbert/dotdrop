@@ -72,6 +72,9 @@ run() {
 	# Synchronize notable repository
 	run "" gitsync -f "%f" ~/.notable
 
+	# Synchronize keepass repository
+	run "" gitsync -f "%f" ~/.keepass
+
 # }}}
 
 disown;

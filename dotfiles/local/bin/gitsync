@@ -54,8 +54,8 @@ inotifywait -q -e close_write,delete --exclude "4913|\.git\/" -r $1 -m | while r
 		msg="${msg//"%e"/"$events"}"
 		msg="${msg//"%d"/"`date`"}"
 		cd $directory
-		git add $filename
-		git commit -q -m $msg
+		git add .
+		git commit -q -m "$msg"
 		git push
 	)
 done

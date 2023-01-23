@@ -33,7 +33,7 @@ return function()
 
 			-- [ GO mappings ]
 			-- ---------------
-			{ '(.*).go', {
+			{ '(.+).go', { -- FIX: this pattern matches "(.*)_test.go" files too
 				{ '[1]_test.go', 'Test file', false },
 			} },
 			{ '(.*)_test.go', {

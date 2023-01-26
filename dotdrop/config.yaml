@@ -171,6 +171,18 @@ dotfiles:
     src: lib/systemd/system-sleep/bluetooth.sh
     dst: /lib/systemd/system-sleep/bluetooth.sh
     chmod: '755'
+  f_local_bin_namedproc:
+    src: local/bin/namedproc
+    dst: ~/.local/bin/namedproc
+    chmod: '755'
+  f_local_bin_db:
+    src: local/bin/db
+    dst: ~/.local/bin/db
+    chmod: '755'
+  f_lib_systemd_system-sleep_autostart.sh:
+    src: lib/systemd/system-sleep/autostart.sh
+    dst: /lib/systemd/system-sleep/autostart.sh
+    chmod: '755'
 profiles:
   home:
     variables:
@@ -224,6 +236,8 @@ profiles:
     - f_bash_profile
     - d_config_nvim
     - f_gitconfig
+    - f_local_bin_namedproc
+    - f_local_bin_db
 
   gui:
     include:
@@ -259,3 +273,4 @@ profiles:
     - f_local_bin_clipqqr
     - d_screenlayout
     - f_lib_systemd_system-sleep_bluetooth.sh
+    - f_lib_systemd_system-sleep_autostart.sh

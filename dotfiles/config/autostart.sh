@@ -2,79 +2,89 @@
 
 ### Helpers {
 
-action="$1";
+always="always"
 
-# Is logout command (Cleanup)
-is_kill() { [[ "$action" == "kill" ]]; }
+action=($always $@)
 
+# Check if current autostart action matches $1
+is() { [[ " ${action[@]} " =~ " $1 " ]]; }
 # Is process $1 running
-is_running() { test $(pgrep $1 | head -n1); }
+is_running() { test $(pgrep -f `procname $@` | head -n1); }
+procname() { echo $@ | base64 -w 0; }
+start_process() { namedproc `procname $@` -- $@ & disown; }
+stop_process() { rkill $(pgrep -f `procname $@`); }
 
-# Only run when there are no windows on the screen
-on_startup() { is_kill || [[ "$(wmctrl -l | wc -l)" = "0" ]] && $@ & }
-
-# Run only once. If an instance is already running, noop
-once() {
-  local name=$1; shift
-  if (is_kill); then
-    killall $name
-  else
-    is_running $name || $@ &
-  fi
+match_event() {
+	for event in $1; do
+		is "$event" && break
+	done
 }
 
-# Kill previous instance and run again
-run() {
-  local name=$1; shift
-  [[ ! -z "$name" ]] && is_running $name && pkill $name
-  is_kill || $@ &
+on() {
+	local do_restart=false
+	local triggers=$1; shift
+	while [[ $# -gt 0 ]] ; do
+		case "$1" in
+			-R|--restart) do_restart=true; shift ;; # kill if an instance is already running
+			*) break ;;
+		esac
+	done
+	if match_event "$triggers"; then
+		if is "dry"; then
+			echo $@
+		else
+			$do_restart && stop_process "$@"
+			is_running "$@" || start_process $@
+		fi
+	fi
 }
+
 # }
 
 
 ##### Autostart {{{
 
   # Status bar
-  run "polybar" ~/.config/polybar/launch.sh
-  # run "" i3status
+  on "startup reload" ~/.config/polybar/launch.sh
+  # on "$startup" i3status
 
   # Better key autorepeat rate
-  run "" xset r rate 200 50
+  on "startup" xset r rate 200 50
 
   # Set default cursor
-  run "" xsetroot -cursor_name left_ptr
+  on "startup" xsetroot -cursor_name left_ptr
 
   # Wallpaper
-  run "" feh --bg-fill ~/.wall
+  on "startup" feh --bg-fill ~/.wall
 
   # Auto lock when idle
-  run "idlelock" idlelock
+  on "startup wakeup" -R idlelock
 
   # Notification daemon
-  once "dunst" dunst -config ~/.config/dunst/dunstrc
+  on "startup" dunst -config ~/.config/dunst/dunstrc
 
   # Compositor
-  run "picom" picom --config ~/.config/picom/picom.conf;
-  # run "xcompngr" xcompmgr;
+  on "startup" picom --config ~/.config/picom/picom.conf
+  # on "$always" xcompmgr
 
   # Network manager applet
-  once "nm-applet" nm-applet
+  on "startup" nm-applet
 
   # Bluetooth applet
-  once "blueman-applet" blueman-applet
+  on "startup" blueman-applet
 
   # Automatic screen temperature and brightness
-  # run "redshift" redshift -c ~/.config/redshift/redshift.conf
+  # on "startup" redshift -c ~/.config/redshift/redshift.conf
 
   # Hotkey daemon 
-  run "sxhkd" sxhkd -c ~/.config/sxhkd/sxhkdrc
+  on "startup reload" -R sxhkd -c ~/.config/sxhkd/sxhkdrc
 
 	# Synchronize notable repository
-	run "" gitsync -f "%f" ~/.notable
+	# on "startup wakeup" -R gitsync -f "%f" ~/.notable
+	on "startup wakeup" -R gitsync -f "%f" ~/.notable
 
 	# Synchronize keepass repository
-	run "" gitsync -f "%f" ~/.keepass
+	# on "startup wakeup" -R gitsync -f "%f" ~/.keepass
+	on "startup wakeup" -R gitsync -f "%f" ~/.keepass
 
 # }}}
-
-disown;

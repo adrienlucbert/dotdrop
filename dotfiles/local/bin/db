@@ -1,0 +1,79 @@
+#!/bin/bash
+
+# Get value by key
+get() {
+   db=$1;
+   key=$(echo -n "$2" | base64 -w 0);
+   sed -nr "s/^$key\ (.*$)/\1/p" $db | base64 -d
+}
+
+# List all keys
+list() {
+   db=$1;
+   sed -nr "s/(^[^\ ]+)\ (.*$)/\1/p" $db | xargs -n 1 sh -c 'echo `echo -n $0 | base64 -d`'
+}
+
+# Get last added value 
+last() {
+   db=$1;
+   sed -nr "\$s/(.*)\ (.*$)/\2/p;d" $db | base64 -d
+}
+
+# Put or updated record
+put() {
+   db=$1;
+   key=$(echo -n "$2" | base64 -w 0);
+   value=$3;
+   if [ -z "$3" ]
+   then
+      value=$(base64 -w 0 <&0);
+   else
+      value=$(echo -n "$value" | base64 -w 0);
+   fi
+
+   if [ ! -f "$1" ]; then touch "$db"; fi;
+   if [[ $(grep "^"$key" " $db) == "" ]]; then
+      #Insert
+      echo "$key $value" >> $db
+   else
+      #Replace
+      sed -ir "s/^$key\ .*/$key $value/g" $db
+   fi;
+}
+
+# Remove record by key
+remove() {
+   db=$1;
+   key=$(echo -n "$2" | base64 -w 0);
+   sed -ri "/^"$key"\ .*/d" "$db"
+}
+
+# Create a new database in the given directory (defaults to $HOME/.local/share/dbsh)
+new() {
+	db=$1
+	dir=${2:-"$HOME/.local/share/dbsh"}
+	mkdir -p $dir && touch $dir/$db
+	echo $dir/$db
+}
+
+# Delete database
+delete() {
+	rm $1
+}
+
+help() {
+   echo '
+      Usage: db <new|get|list|last|put|delete> <database> [arguments...]
+
+      db help                          - Show this help message
+			db new <database> [directory]    - Create a new database in the given directory (defaults to $HOME/.local/share/dbsh)
+      db get <database> [key]          - Get value of record by key
+      db list <database>               - Get all keys in database
+      db last <database>               - Get the value of the last added record
+      db put <database> [key] [?value] - Insert or update record.
+      db remove <database> <key>       - Remove record by key
+      db delete <database>             - Delete database'
+   exit 0
+}
+
+$@

@@ -73,6 +73,9 @@ on() {
   # Bluetooth applet
   on "startup" blueman-applet
 
+	# Enable media controls via bluetooth device
+  on "startup wakeup" mpris-proxy
+
   # Automatic screen temperature and brightness
   # on "startup" redshift -c ~/.config/redshift/redshift.conf
 

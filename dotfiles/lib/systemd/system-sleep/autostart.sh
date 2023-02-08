@@ -1,6 +1,6 @@
 #!/bin/bash
 
-user=`w | ag i3 | cut -d' ' -f1`
+user=`w | ag {{@@ wm @@}} | cut -d' ' -f1`
 [[ -z "$user" ]] && return
 
 if [ "${1}" == "pre" ]; then

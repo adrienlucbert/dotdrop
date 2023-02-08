@@ -49,32 +49,32 @@ on() {
   # on "$startup" i3status
 
   # Better key autorepeat rate
-  on "startup" xset r rate 200 50
+  on "startup reload" xset r rate 200 50
 
   # Set default cursor
   on "startup" xsetroot -cursor_name left_ptr
 
   # Wallpaper
-  on "startup" feh --bg-fill ~/.wall
+  on "startup reload" feh --bg-fill ~/.wall
 
   # Auto lock when idle
-  on "startup wakeup" -R idlelock
+  on "startup wakeup reload" -R idlelock
 
   # Notification daemon
-  on "startup" dunst -config ~/.config/dunst/dunstrc
+  on "startup reload" -R dunst -config ~/.config/dunst/dunstrc
 
   # Compositor
-  on "startup" picom --config ~/.config/picom/picom.conf
+  on "startup reload" picom --config ~/.config/picom/picom.conf
   # on "$always" xcompmgr
 
   # Network manager applet
   on "startup" nm-applet
 
   # Bluetooth applet
-  on "startup" blueman-applet
+  on "startup reload" blueman-applet
 
 	# Enable media controls via bluetooth device
-  on "startup wakeup" mpris-proxy
+  on "startup wakeup reload" mpris-proxy
 
   # Automatic screen temperature and brightness
   # on "startup" redshift -c ~/.config/redshift/redshift.conf

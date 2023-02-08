@@ -9,8 +9,6 @@ config:
   longkey: true
   import_variables:
   - variables.yaml
-  import_actions:
-  - actions.yaml
 dotfiles:
   f_zshrc:
     src: zshrc
@@ -201,10 +199,6 @@ profiles:
     - f_iex.exs
     - d_iex.d
   root-tty:
-    actions:
-    - vim_install_language_servers
-    - install_paru
-    - install_arch_tty_packages
     dotfiles:
     - f_etc_paru.conf
     - f_etc_pacman.conf
@@ -212,20 +206,16 @@ profiles:
   root-gui:
     include:
     - root-tty
-    actions:
-    - install_arch_gui_packages
     dotfiles:
     - f_var_spool_cron_alucbert
     - d_etc_x11_xorg.conf.d
     - d_etc_udev_rules.d
     - f_etc_lightdm_lightdm.conf
     - f_etc_lightdm_lightdm-gtk-greeter.conf
+    - f_lib_systemd_system-sleep_bluetooth.sh
+    - f_lib_systemd_system-sleep_autostart.sh
 
   tty:
-    actions:
-    - install_ohmyzsh
-    - vim_install_packer
-    - vim_install_language_servers
     dotfiles:
     - f_zshrc
     - f_zsh_profile
@@ -242,8 +232,6 @@ profiles:
   gui:
     include:
     - tty
-    actions:
-    - set_wallpaper
     dotfiles:
     - f_xinitrc
     - f_xresources
@@ -272,5 +260,3 @@ profiles:
     - f_local_bin_qqr
     - f_local_bin_clipqqr
     - d_screenlayout
-    - f_lib_systemd_system-sleep_bluetooth.sh
-    - f_lib_systemd_system-sleep_autostart.sh

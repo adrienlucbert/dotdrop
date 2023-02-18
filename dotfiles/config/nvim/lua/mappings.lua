@@ -30,11 +30,14 @@ map('n', 'Q', '<Nop>')
 map('n', '<Space>', 'za')
 map('n', '<S-Space>', 'zA')
 
-
 -- Resize buffer size
 map('n', '<Up>', '<C-w>2-')
 map('n', '<Down>', '<C-w>2+')
 map('n', '<Left>', '<C-w>2<')
 map('n', '<Right>', '<C-w>2>')
+
+-- Enter/leave terminal mode
+map('n', 'N', ':10sv<CR>:term<CR>A')
+map('t', '<Esc><Esc>', '<C-\\><C-n>')
 
 require('qf').setup({ default_bindings = true })

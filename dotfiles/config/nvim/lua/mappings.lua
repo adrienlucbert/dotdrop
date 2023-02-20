@@ -37,7 +37,7 @@ map('n', '<Left>', '<C-w>2<')
 map('n', '<Right>', '<C-w>2>')
 
 -- Enter/leave terminal mode
-map('n', '<leader>T', ':10sv<CR>:term<CR>A')
+map('n', '<leader>T', ':10sp<CR>:term<CR>A')
 map('t', '<Esc><Esc>', '<C-\\><C-n>')
 
 require('qf').setup({ default_bindings = true })

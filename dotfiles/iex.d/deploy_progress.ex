@@ -1,0 +1,2 @@
+# res = []
+# res = [HerOmnicanal.Product.Indexer, HerOmnicanal.ProductLocator.Indexer, HerOmnicanal.SharedStock.Filiale.Indexer, HerOmnicanal.SharedStock.Stockroom.Indexer, HerOmnicanal.Presentability.Indexer] |> Enum.with_index |> Enum.map(fn {mod, i} -> count = mod.search(:all) |> Enum.count; {count, count - (res |> Enum.at(i, {0, 0}) |> elem(0))} end)

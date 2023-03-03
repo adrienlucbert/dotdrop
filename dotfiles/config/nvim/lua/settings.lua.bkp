@@ -1,0 +1,117 @@
+-- auto source and compile when saving changes to nvim config
+local nvimconfig = vim.api.nvim_create_augroup('nvimconfig', { clear = true })
+vim.api.nvim_create_autocmd('BufWritePost', {
+	group = nvimconfig,
+	pattern = vim.fn.expand('~') .. '/.config/nvim/**',
+	command = ':source $MYVIMRC | :PackerCompile',
+})
+
+-- reload buffer if it was modified outside of nvim
+local autoreload = vim.api.nvim_create_augroup('autoreload ', { clear = true })
+vim.api.nvim_create_autocmd({ 'FocusGained', 'CursorHold' }, {
+	group = autoreload,
+	pattern = '*',
+	command = 'checktime',
+})
+
+-- populate loclist with lsp diagnostics
+local diaglist = vim.api.nvim_create_augroup('diaglist ', { clear = true })
+vim.api.nvim_create_autocmd({ 'DiagnosticChanged' }, {
+	group = diaglist,
+	pattern = '*',
+	command = ':lua vim.diagnostic.setloclist({open = false})',
+})
+
+-- local opt = vim.opt
+--
+-- opt.syntax = 'enable'
+-- -- filetype plugin indent on
+--
+-- --------------------------------------------------------------------------------
+-- -- General
+-- --------------------------------------------------------------------------------
+--
+-- opt.mouse = 'c'
+-- opt.clipboard = 'unnamedplus'
+-- opt.completeopt = 'menuone,noinsert,noselect,preview'
+-- opt.errorbells = false
+--
+-- --------------------------------------------------------------------------------
+-- -- UI
+-- --------------------------------------------------------------------------------
+--
+-- vim.cmd('colorscheme jellybeans')
+-- opt.termguicolors = true
+-- opt.number = true
+-- opt.relativenumber = true
+-- opt.wrap = false
+-- opt.scrolloff = 999
+-- opt.sidescrolloff = 999
+-- opt.colorcolumn = '80'
+-- opt.splitright = true
+-- opt.splitbelow = true
+-- opt.signcolumn = 'yes'
+-- opt.cursorline = true
+-- opt.cmdheight = 1
+-- vim.cmd('highlight Pmenu ctermbg=none guibg=none')
+-- vim.cmd('highlight PmenuSel ctermbg=darkgray guibg=darkgray')
+-- vim.cmd('highlight PmenuSbar ctermbg=gray guibg=gray')
+-- vim.cmd('highlight PmenuThumb ctermbg=darkgray guibg=darkgray')
+--
+-- --------------------------------------------------------------------------------
+-- -- Performance
+-- --------------------------------------------------------------------------------
+--
+-- opt.hidden = true
+-- opt.history = 100
+-- opt.lazyredraw = true
+--
+-- --------------------------------------------------------------------------------
+-- -- Edition
+-- --------------------------------------------------------------------------------
+--
+-- opt.tabstop = 2
+-- opt.shiftwidth = 2
+-- opt.expandtab = true
+-- opt.autoindent = true
+-- opt.smartindent = true
+-- opt.fixeol = false
+-- opt.eol = false
+-- opt.binary = true
+--
+-- --------------------------------------------------------------------------------
+-- -- Search
+-- --------------------------------------------------------------------------------
+--
+-- opt.inccommand = 'split'
+-- opt.smartcase = true
+-- opt.wildignorecase = true
+-- opt.wildignore = '*.o,*.gcno,*.gcda,node_modules,.git'
+-- opt.ignorecase = true
+-- opt.autochdir = false
+--
+-- --------------------------------------------------------------------------------
+-- -- Backup
+-- --------------------------------------------------------------------------------
+--
+-- opt.backup = true
+-- opt.undofile = true
+-- opt.swapfile = false
+--
+-- vim.g.undodir   = vim.fn.expand('~') .. '/.nvim/tmp/undo/'
+-- opt.undodir     = vim.g.undodir
+-- vim.g.backupdir = vim.fn.expand('~') .. '/.nvim/tmp/backup/'
+-- opt.backupdir   = vim.g.backupdir
+-- vim.g.directory = vim.fn.expand('~') .. '/.nvim/tmp/swap/'
+-- opt.directory   = vim.g.directory
+--
+-- -- Create those directories if needed
+-- if not vim.fn.isdirectory(vim.g.undodir) then
+-- 	vim.fn.mkdir((vim.g.undodir, "p")
+-- end
+-- if not vim.fn.isdirectory(vim.g.backupdir) then
+-- 	vim.fn.mkdir(vim.g.backupdir, "p")
+-- end
+-- if not vim.fn.isdirectory(vim.g.directory) then
+-- 	vim.fn.mkdir(vim.g.directory, "p")
+-- end

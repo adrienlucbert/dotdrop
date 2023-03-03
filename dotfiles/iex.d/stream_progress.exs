@@ -23,6 +23,8 @@ defmodule StreamProgress do
     - :step: log every nth element processed
     - :logger: function used to log progress, of the form:
       logger(%{index :: integer(), max :: integer(), step :: integer(), time_left :: integer()}) :: any()
+		- :progress_getter: function used to map a stream element to its progress indicator. Defaults to the element's index
+			progress_getter(element :: any()) :: integer()
 
   If the stream input size can be determined (if stream.enum is an enumerable),
   the :max and :step optional parameters will be determined automatically.
@@ -52,13 +54,21 @@ defmodule StreamProgress do
     # The stream input is a function (Task.async_stream), :max and :step can't be determined automatically, but are provided by the user
     iex(3)> 1..1000 |> Task.async_stream(fn _ -> :timer.sleep(10) end, max_concurrency: 10) |> StreamProgress.log(max: 1000) |> Stream.run()
     100.0% |███████████████████████████████| (1000/1000) [00:01<00:00]:ok
+
+		# Using a non-default progress indicator
+    iex(4)> 1..1000 |> Task.async_stream(fn c -> :timer.sleep(10); c end) |> StreamProgress.log(max: 100, progress_getter: fn {:ok, c} -> div(c, 10) end, step: 1) |> Stream.run
+    100.0% |███████████████████████████████| (100/100) [00:00<00:00]:ok
   """
   def log(stream, opts \\ []) do
     max = Keyword.get(opts, :max) || if is_function(stream) || is_function(stream.enum) do nil else stream.enum |> Enum.count end
     step = Keyword.get(opts, :step) || if is_nil(max), do: 1000, else: max(1, div(max, 1000))
     logger = Keyword.get(opts, :logger, &log_progress/1)
+    map_index = case Keyword.get(opts, :progress_getter) do
+      nil -> &Stream.with_index(&1, 1)
+      f -> &Stream.map(&1, fn e -> {e, f.(e)} end)
+    end
     stream
-    |> Stream.with_index(1)
+    |> map_index.()
     |> Stream.transform(%{}, fn ({value, idx}, state) ->
       now = :os.perf_counter(:nanosecond)
       cond do
@@ -71,7 +81,7 @@ defmodule StreamProgress do
               max: max,
               step: step,
               time_elapsed: elapsed |> div(1000_000_000),
-              time_left: (div(elapsed * max, idx) - elapsed) |> div(1000_000_000),
+              time_left: (div(elapsed * max, max(idx, 1)) - elapsed) |> div(1000_000_000),
             }
           end
           logger.(logger_opts)

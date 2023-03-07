@@ -54,7 +54,7 @@ return function()
 
 	local servers = {
 		require('lsp.eslint'),
-		require('lsp.sumneko_lua'),
+		require('lsp.lua_ls'),
 		require('lsp.diagnosticls'),
 		require('lsp.nvim-lsp-ts-utils'),
 		require('lsp.texlab'),

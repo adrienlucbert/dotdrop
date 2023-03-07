@@ -10,7 +10,7 @@ super + shift + p
 
 # launch terminal emulator
 super + Return
-	kitty
+	kitty ~
 
 # launch browser
 super + w

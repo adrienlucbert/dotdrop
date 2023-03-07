@@ -2,4 +2,5 @@ cmake-language-server
 colout-git
 dotdrop
 jmtpfs
-neovim-nightly-bin
+python3
+fd

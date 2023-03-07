@@ -181,6 +181,9 @@ dotfiles:
     src: lib/systemd/system-sleep/autostart.sh
     dst: /lib/systemd/system-sleep/autostart.sh
     chmod: '755'
+  f_profile:
+    src: profile
+    dst: ~/.profile
 profiles:
   home:
     variables:
@@ -198,6 +201,7 @@ profiles:
     - f_config_polybar_modules_vpn.ini
     - f_iex.exs
     - d_iex.d
+    - f_profile
   root-tty:
     dotfiles:
     - f_etc_paru.conf

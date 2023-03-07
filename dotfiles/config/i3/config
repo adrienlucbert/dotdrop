@@ -32,7 +32,9 @@ default_floating_border none
 # exec --no-startup-id nm-applet
 
 exec --no-startup-id ~/.config/autostart.sh startup &
+{%@@ if profile == "home" @@%}
 exec --no-startup-id ~/.config/i3/scripts/fix-unity-redraw.sh &
+{%@@ endif @@%}
 
 # Use pactl to adjust volume in PulseAudio.
 set $unity-refresh exec i3-msg [class="Unity"] fullscreen toggle; exec i3-msg [class="Unity"] fullscreen toggle

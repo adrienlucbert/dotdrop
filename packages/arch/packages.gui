@@ -1,6 +1,7 @@
 adobe-source-sans-fonts
 alsa-plugins
 alsa-utils
+alsa-firmware
 arandr
 arc-gtk-theme
 arc-icon-theme
@@ -46,3 +47,7 @@ xclip
 xsel
 zathura
 zathura-pdf-mupdf
+xorg-xinit
+google-chrome
+spotify
+sof-firmware

@@ -47,3 +47,11 @@ yarn
 zip
 zsh
 pslist
+linux-firmware
+neovim
+iw
+lua-language-server
+gopls
+go
+golangci-lint
+golangci-lint-langserver

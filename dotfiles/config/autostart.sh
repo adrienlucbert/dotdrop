@@ -64,7 +64,11 @@ on() {
   on "startup reload" -R dunst -config ~/.config/dunst/dunstrc
 
   # Compositor
+	{%@@ if profile == "work" @@%}
+  # on "startup reload" picom --config ~/.config/picom/picom.conf
+	{%@@ else @@%}
   on "startup reload" picom --config ~/.config/picom/picom.conf
+	{%@@ endif @@%}
   # on "$always" xcompmgr
 
   # Network manager applet

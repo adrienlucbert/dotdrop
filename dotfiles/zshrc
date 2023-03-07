@@ -106,10 +106,6 @@ tmp()
 	
 }
 
-{%@@ if profile == "work" @@%}
-alias kbrw.start_endpoint='cd ~/projects/endpoint/endpoints && python3 -m  http.server 8000'
-
-{%@@ endif @@%}
 # ---- Programs configuration and custom commands ----
 # cmake() {
 #   /usr/bin/cmake $1 -GNinja -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ ${@:2}

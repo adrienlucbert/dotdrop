@@ -193,15 +193,9 @@ profiles:
 
   work:
     variables:
-      use_vpn: true
-      email: adrien.lucbert@kbrwadventure.com
+      email: adrien.lucbert@displayce.com
     include:
     - gui
-    dotfiles:
-    - f_config_polybar_modules_vpn.ini
-    - f_iex.exs
-    - d_iex.d
-    - f_profile
   root-tty:
     dotfiles:
     - f_etc_paru.conf
@@ -232,6 +226,7 @@ profiles:
     - f_gitconfig
     - f_local_bin_namedproc
     - f_local_bin_db
+    - f_profile
 
   gui:
     include:

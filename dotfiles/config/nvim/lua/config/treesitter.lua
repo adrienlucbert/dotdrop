@@ -18,6 +18,7 @@ return function()
 			'typescript',
 			'yaml',
 			'elixir',
+			'go',
 		},
 		highlight = {
 			enable = true,

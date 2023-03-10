@@ -33,7 +33,7 @@ return require('packer').startup({
 		use {
 			'neovim/nvim-lspconfig',
 			requires = {
-				{ 'RishabhRD/nvim-lsputils', requires = 'RishabhRD/popfix' },
+				{ 'RishabhRD/nvim-lsputils',        requires = 'RishabhRD/popfix' },
 				{ 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' },
 			},
 			config = require('lsp'),
@@ -127,12 +127,26 @@ return require('packer').startup({
 			"airblade/vim-rooter", -- `cd` to an identified root directory
 			config = require('config.vim-rooter')
 		}
+		-- use {
+		-- 	"notjedi/nvim-rooter.lua", -- `cd` to an identified root directory
+		-- 	config = require('config.nvim-rooter')
+		-- }
 		use {
-			'iamcco/markdown-preview.nvim', -- Preview markdown in the browser
+			'iamcco/markdown-preview.nvim',                  -- Preview markdown in the browser
 			run = function() vim.fn["mkdp#util#install"]() end, -- https://github.com/iamcco/markdown-preview.nvim/issues/506
 			config = require('config.markdown-preview')
 		}
 		use 'AndrewRadev/linediff.vim'
+		use {
+			'nvim-neotest/neotest',
+			config = require('config.neotest'),
+			requires = {
+				'nvim-neotest/neotest-go',
+				'nvim-lua/plenary.nvim',
+				'nvim-treesitter/nvim-treesitter',
+				'antoinemadec/FixCursorHold.nvim'
+			}
+		}
 		-- use {
 		--   "gpanders/editorconfig.nvim" -- Support for .editorconfig files
 		-- }

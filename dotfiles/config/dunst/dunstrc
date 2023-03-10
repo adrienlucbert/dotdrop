@@ -41,3 +41,7 @@
 
 [spotify]
     appname = *Spotify*
+
+[test]
+		appname = *
+		script = /home/alucbert/.local/bin/dunst-test.sh

@@ -62,6 +62,9 @@ XF86AudioMute
 XF86Audio{Raise,Lower}Volume
   amixer set Master {5%+,5%-} unmute
 
+# mute microphone
+# XF86AudioMicMute
+
 # raise laptop brightness
 XF86MonBrightnessUp
   xbacklight -inc 5
@@ -69,6 +72,10 @@ XF86MonBrightnessUp
 # lower laptop brightness
 XF86MonBrightnessDown
   xbacklight -dec 5
+
+# display options
+XF86Display
+	monitorcontrol
 
 # raise global brightness
 shift + XF86MonBrightnessUp

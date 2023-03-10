@@ -73,6 +73,7 @@ function set_brightness()
     if [ ! -z "$2" ]; then
         xrandr --output $2 --brightness $1
     else
+				# dunstify -a "changeBrightness" -u low -h string:x-dunst-stack-tag:brightness -h int:value:"$(( $1 * 100 ))" "Brightness: $1"
         for i in "${!monitors[@]}"; do
             set_brightness $1 ${monitors[$i]}
         done

@@ -33,6 +33,10 @@ return function()
 				prev_failed = "K",
 			},
 		},
+		quickfix = {
+			enabled = true,
+			open = false,
+		},
 	})
 
 	map('n', '<c-t><c-t>', ':lua require("neotest").summary.toggle()<CR>')

@@ -1,54 +1,55 @@
 #!/usr/bin/bash
 
 PROCNAME=$(basename "$0")
-FIFO=$HOME/.local/share/.$PROCNAME.fifo
+STDIN_FIFO=$HOME/.local/share/.$PROCNAME.stdin.fifo
+STDOUT_LOGFILE=$HOME/.local/share/.$PROCNAME.stdout.log
+STDERR_LOGFILE=$HOME/.local/share/.$PROCNAME.stderr.log
 
 function start() {
-	rm -f $FIFO && mkfifo $FIFO
-
-	function cleanup() {
-		rm $FIFO
-	}
-
-	trap cleanup EXIT
-
-	while read -r line < $FIFO; do
+	rm -f $STDOUT_LOGFILE
+	rm -f $STDERR_LOGFILE
+	! [ -f $STDIN_FIFO ] || mkfifo $STDIN_FIFO
+	while read -r line < $STDIN_FIFO; do
 		exec_cmd $line
 	done
 }
 
+EVENTS=()
+
 function exec_cmd() {
 	case "$1" in
+		publish)
+			publish ${@:2}
+			;;
 		subscribe)
 			subscribe ${@:2}
 			;;
-		publish)
-			publish ${@:2}
+		debug)
+			echo "${EVENTS[@]}" >> $STDOUT_LOGFILE
 			;;
 	esac
 }
 
 function publish() {
-	echo $(date) publish $@ >> $HOME/.local/share/.$PROCNAME.log
+	for event in ${EVENTS[@]}; do
+		local IFS=";"
+		read -r -a event <<< "$event"
+		if [[  "${event[0]}" ==  "${1}" ]]; then
+			${event[1]} "${@:2}" 1>> $STDOUT_LOGFILE 2>> $STDERR_LOGFILE
+		fi
+	done
 }
 
 function subscribe() {
-	echo $(date) subscribe $@ >> $HOME/.local/share/.$PROCNAME.log
+	EVENTS+=("${1};${2};${3}")
 }
 
 if [ $# -eq 0 ]; then
 	start
 else
 	b64procname=$(echo $PROCNAME | base64 -w 0)
-	pid=$(pgrep -f $b64procname | head -n1)
-	if ! [[ "$pid" ]]; then
+	if ! [[ "$(pgrep -f $b64procname | head -n1)" ]]; then
 		namedproc $b64procname -- $0 & disown
-		pid=$!
-		ps aux | ag $pid
 	fi
-	echo $@ > $FIFO
-	# while read -r line < /proc/$pid/fd/1; do
-	# 	[[ "$line" == "EOF" ]] && echo stop && break
-	# 	echo $line
-	# done
+	echo $@ > $STDIN_FIFO
 fi

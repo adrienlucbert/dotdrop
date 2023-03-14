@@ -184,6 +184,10 @@ dotfiles:
   f_profile:
     src: profile
     dst: ~/.profile
+  f_local_bin_pubsub:
+    src: local/bin/pubsub
+    dst: ~/.local/bin/pubsub
+    chmod: '755'
 profiles:
   home:
     variables:
@@ -228,6 +232,7 @@ profiles:
     - f_local_bin_db
     - f_profile
 
+    - f_local_bin_pubsub
   gui:
     include:
     - tty

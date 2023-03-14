@@ -1,0 +1,54 @@
+#!/usr/bin/bash
+
+PROCNAME=$(basename "$0")
+FIFO=$HOME/.local/share/.$PROCNAME.fifo
+
+function start() {
+	rm -f $FIFO && mkfifo $FIFO
+
+	function cleanup() {
+		rm $FIFO
+	}
+
+	trap cleanup EXIT
+
+	while read -r line < $FIFO; do
+		exec_cmd $line
+	done
+}
+
+function exec_cmd() {
+	case "$1" in
+		subscribe)
+			subscribe ${@:2}
+			;;
+		publish)
+			publish ${@:2}
+			;;
+	esac
+}
+
+function publish() {
+	echo $(date) publish $@ >> $HOME/.local/share/.$PROCNAME.log
+}
+
+function subscribe() {
+	echo $(date) subscribe $@ >> $HOME/.local/share/.$PROCNAME.log
+}
+
+if [ $# -eq 0 ]; then
+	start
+else
+	b64procname=$(echo $PROCNAME | base64 -w 0)
+	pid=$(pgrep -f $b64procname | head -n1)
+	if ! [[ "$pid" ]]; then
+		namedproc $b64procname -- $0 & disown
+		pid=$!
+		ps aux | ag $pid
+	fi
+	echo $@ > $FIFO
+	# while read -r line < /proc/$pid/fd/1; do
+	# 	[[ "$line" == "EOF" ]] && echo stop && break
+	# 	echo $line
+	# done
+fi

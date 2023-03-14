@@ -3,7 +3,9 @@ return function()
 
 	require("neotest").setup({
 		adapters = {
-			require("neotest-go"),
+			require("neotest-go")({
+				args = { "-timeout=10s" }
+			}),
 		},
 		-- default summary config to serve as a quick access reminder
 		-- https://github.com/nvim-neotest/neotest/blob/master/lua/neotest/config/init.lua

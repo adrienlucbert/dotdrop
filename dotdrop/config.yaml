@@ -195,11 +195,28 @@ profiles:
     include:
     - gui
 
+  home-root:
+    variables:
+      xkblayout: gb
+      xkbmodel: pc105
+      xkbvariant: extd
+    include:
+    - root-gui
+
   work:
     variables:
       email: adrien.lucbert@displayce.com
     include:
     - gui
+
+  work-root:
+    variables:
+      xkblayout: us
+      xkbmodel: pc105
+      xkbvariant: altgr-intl
+    include:
+    - root-gui
+
   root-tty:
     dotfiles:
     - f_etc_paru.conf

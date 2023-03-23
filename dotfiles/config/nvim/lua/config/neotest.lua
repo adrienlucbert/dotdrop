@@ -6,6 +6,7 @@ return function()
 			require("neotest-go")({
 				args = { "-timeout=10s" }
 			}),
+			require("neotest-python")
 		},
 		-- default summary config to serve as a quick access reminder
 		-- https://github.com/nvim-neotest/neotest/blob/master/lua/neotest/config/init.lua

@@ -40,6 +40,11 @@ return require('packer').startup({
 		}
 		use 'mustache/vim-mustache-handlebars'
 		use {
+			'jose-elias-alvarez/null-ls.nvim',
+			requires = 'nvim-lua/plenary.nvim',
+			config = require('config.null-ls'),
+		}
+		use {
 			'jose-elias-alvarez/nvim-lsp-ts-utils',
 			requires = {
 				{ 'jose-elias-alvarez/null-ls.nvim' },
@@ -142,6 +147,7 @@ return require('packer').startup({
 			config = require('config.neotest'),
 			requires = {
 				'nvim-neotest/neotest-go',
+				'nvim-neotest/neotest-python',
 				'nvim-lua/plenary.nvim',
 				'nvim-treesitter/nvim-treesitter',
 				'antoinemadec/FixCursorHold.nvim'

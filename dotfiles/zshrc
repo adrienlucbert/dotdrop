@@ -103,8 +103,9 @@ tmp()
 	ext=${1:-md}
 	file=`mktemp --suffix=.$ext`
 	nvim $file && confirm "Delete buffer?" && rm $file || echo $file
-	
 }
+
+alias screen="screen -h 1000"
 
 # ---- Programs configuration and custom commands ----
 # cmake() {

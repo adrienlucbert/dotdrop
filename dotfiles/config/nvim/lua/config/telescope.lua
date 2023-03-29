@@ -26,6 +26,7 @@ return function()
 				use_highlighter = true,
 			},
 			['telescope-alternate'] = require('config.telescope-alternate')(),
+			live_grep_args = require('config.telescope-live-grep-args')(),
 		},
 		mappings = {
 		},
@@ -33,8 +34,12 @@ return function()
 
 	telescope.load_extension('fzf_writer')
 	telescope.load_extension('telescope-alternate')
+	telescope.load_extension('live_grep_args')
 
 	map('n', '<C-p>', ':lua require\'telescope.builtin\'.find_files()<CR>')
 	map('n', '<C-j>', ':lua require(\'telescope.builtin\').live_grep()<CR>')
 	map('n', 'ga', ':Telescope telescope-alternate alternate_file<CR>')
 end
+
+
+

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-function usage_and_exit() {
+usage_and_exit() {
   >&2 echo "Quickly generate a QR code."
   >&2 echo ""
   >&2 echo "Usage: qqr [OPTION]... [CONTENT]..."
@@ -12,7 +12,7 @@ specified, the generated QR code will be output to standard output
   -d, --display:display the generated QR code
   -t, --timeout <time>:stop displaying the generated QR code after a delay
   " | column -t -s ':'
-  exit ${1:-1}
+  exit "${1:-1}"
 }
 
 opt_from_stdin=
@@ -20,7 +20,7 @@ opt_output=
 opt_display=
 opt_timeout=
 
-while [[ $# -gt 0 ]]; do
+while [ $# -gt 0 ]; do
   case "$1" in
     -i|--from-stdin)
       opt_from_stdin=1
@@ -39,7 +39,7 @@ while [[ $# -gt 0 ]]; do
     -h|--help)
       usage_and_exit
       ;;
-    -*|--*)
+    -*)
       usage_and_exit 1
       ;;
     *)
@@ -49,14 +49,20 @@ while [[ $# -gt 0 ]]; do
   shift
 done
 
-stdin=`test $opt_from_stdin && cat`
-test $stdin || test "$@" || usage_and_exit 1
+stdin=$(test $opt_from_stdin && cat)
+test "$stdin" || test "$@" || usage_and_exit 1
 
 # assign default values
 content=${stdin:-"$*"}
-file=${opt_output:-`mktemp`}
+file=${opt_output:-$(mktemp)}
 
-qrencode -l H -o $file "$content"
+qrencode -l H -o "$file" "$content" || (rm "$file" && exit 1)
 display_cmd="feh $file"
-test $opt_display && (test $opt_timeout && (timeout ${opt_timeout}s $display_cmd; true) || $display_cmd)
-test $opt_output || rm $file
+if [ "$opt_display" ]; then
+	if [ "$opt_timeout" ]; then
+		timeout "${opt_timeout}"s "$display_cmd"
+	else
+		$display_cmd
+	fi
+fi
+test "$opt_output" || rm "$file"

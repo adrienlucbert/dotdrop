@@ -1,5 +1,5 @@
 return function()
-	local null_ls = require "null-ls"
+	local null_ls = require("null-ls")
 
 	-- python builtins with custom cli args
 
@@ -9,6 +9,9 @@ return function()
 			null_ls.builtins.formatting.stylua,
 			null_ls.builtins.formatting.black.with({
 				extra_args = { "--line-length", "150" },
+			}),
+			null_ls.builtins.formatting.sqlfmt.with({
+				filetypes = { "sql", "jinja", "j2" },
 			}),
 			-- diagnostics
 			null_ls.builtins.diagnostics.shellcheck,

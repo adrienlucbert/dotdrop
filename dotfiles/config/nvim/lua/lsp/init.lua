@@ -69,6 +69,7 @@ return function()
 		{ name = 'jsonls' },
 		{ name = 'gopls' },
 		{ name = 'golangci_lint_ls' },
+		{ name = 'phpactor' },
 	}
 
 	vim.lsp.protocol.CompletionItemKind = {

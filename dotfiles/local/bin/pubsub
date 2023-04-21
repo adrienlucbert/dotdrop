@@ -6,10 +6,10 @@ STDOUT_LOGFILE=$HOME/.local/share/.$PROCNAME.stdout.log
 STDERR_LOGFILE=$HOME/.local/share/.$PROCNAME.stderr.log
 
 function start() {
-	rm -f $STDOUT_LOGFILE
-	rm -f $STDERR_LOGFILE
-	! [ -f $STDIN_FIFO ] || mkfifo $STDIN_FIFO
-	while read -r line < $STDIN_FIFO; do
+	rm -f "$STDOUT_LOGFILE"
+	rm -f "$STDERR_LOGFILE"
+	! [ -f "$STDIN_FIFO" ] || mkfifo "$STDIN_FIFO"
+	while read -r line < "$STDIN_FIFO"; do
 		exec_cmd $line
 	done
 }
@@ -25,7 +25,7 @@ function exec_cmd() {
 			subscribe ${@:2}
 			;;
 		debug)
-			echo "${EVENTS[@]}" >> $STDOUT_LOGFILE
+			echo "${EVENTS[@]}" >> "$STDOUT_LOGFILE"
 			;;
 	esac
 }
@@ -35,7 +35,7 @@ function publish() {
 		local IFS=";"
 		read -r -a event <<< "$event"
 		if [[  "${event[0]}" ==  "${1}" ]]; then
-			${event[1]} "${@:2}" 1>> $STDOUT_LOGFILE 2>> $STDERR_LOGFILE
+			${event[1]} "${@:2}" 1>> "$STDOUT_LOGFILE" 2>> "$STDERR_LOGFILE"
 		fi
 	done
 }
@@ -47,9 +47,9 @@ function subscribe() {
 if [ $# -eq 0 ]; then
 	start
 else
-	b64procname=$(echo $PROCNAME | base64 -w 0)
-	if ! [[ "$(pgrep -f $b64procname | head -n1)" ]]; then
-		namedproc $b64procname -- $0 & disown
+	b64procname=$(echo "$PROCNAME" | base64 -w 0)
+	if ! [[ "$(pgrep -f "$b64procname" | head -n1)" ]]; then
+		namedproc "$b64procname" -- "$0" & disown
 	fi
-	echo $@ > $STDIN_FIFO
+	echo "$@" > "$STDIN_FIFO"
 fi

@@ -145,14 +145,10 @@ valgrind()
 
 csv()
 {
-  delimiter=$2
-  if [ -z "$2" ]; then
-    delimiter=";"
-  fi
   if [ -z "$1" ]; then
     >&2 echo "Open a CSV file in your terminal"
     >&2 echo "Usage: csv filename [delimiter]"
     return 1
   fi
-  column -t -s$delimiter $1 | less
+  column -t -s${2:-,} $1 | less
 }

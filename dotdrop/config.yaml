@@ -188,10 +188,11 @@ dotfiles:
     src: local/bin/pubsub
     dst: ~/.local/bin/pubsub
     chmod: '755'
+  f_gitconfig-work:
+    src: gitconfig-work
+    dst: ~/.gitconfig-work
 profiles:
   home:
-    variables:
-      email: adrien.lucbert@epitech.eu
     include:
     - gui
 
@@ -204,11 +205,11 @@ profiles:
     - root-gui
 
   work:
-    variables:
-      email: adrien.lucbert@displayce.com
     include:
     - gui
 
+    dotfiles:
+    - f_gitconfig-work
   work-root:
     variables:
       xkblayout: us

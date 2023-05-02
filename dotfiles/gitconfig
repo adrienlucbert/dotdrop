@@ -1,6 +1,11 @@
 [user]
-	email = {{@@ email @@}}
+	email = adrien.lucbert@gmail.com
 	name = Adrien Lucbert
+
+{%@@ if profile == "work" @@%}
+[includeIf "gitdir: ~/projects"]
+    path = .gitconfig-work
+{%@@ endif @@%}
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f
@@ -35,3 +40,12 @@
 	prune = true
 [diff]
 	colorMoved = zebra
+[push]
+	autoSetupRemote = true
+[alias]
+	rl = ! git reflog --pretty='%C(red)%h %C(yellow)%gd%C(reset) %gs %C(green)%ad%C(reset) %C(blue)[%ar]%C(reset)' --color=always | fzf --ansi | cut -d' ' -f2 | xclip -sel clip
+	logadog = log --abbrev-commit --decorate --oneline --graph
+	diffs = diff --staged
+	restores = restore --staged
+	stashs = stash push -S
+

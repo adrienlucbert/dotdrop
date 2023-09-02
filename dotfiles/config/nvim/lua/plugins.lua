@@ -15,6 +15,7 @@ return require("packer").startup({
 		use("wbthomason/packer.nvim")
 
 		-- Cosmetics
+		-- use({ "edluffy/hologram.nvim", config = require("config.hologram") })
 		use("nanotech/jellybeans.vim")
 		use("ryanoasis/vim-devicons")
 		-- TODO: replace with lualine
@@ -27,10 +28,13 @@ return require("packer").startup({
 		--   'Pocco81/true-zen.nvim',
 		--   config = require('config.true-zen')
 		-- }
+		-- use {
+		-- 	'jinh0/eyeliner.nvim',
+		-- 	config = require('config.eyeliner')
+		-- }
 
 		-- LSP
-		use({ "nathom/filetype.nvim", config = require("config.filetype") })
-		use({ "hrsh7th/cmp-nvim-lsp" })
+		-- use({ "nathom/filetype.nvim", config = require("config.filetype") })
 		use({
 			"neovim/nvim-lspconfig",
 			requires = {
@@ -54,10 +58,13 @@ return require("packer").startup({
 		})
 		use({
 			"j-hui/fidget.nvim",
+			tag = "legacy",
 			config = require("config.fidget"),
 		})
 		-- Completion menu
+		use({ "hrsh7th/cmp-nvim-lsp" })
 		use({ "hrsh7th/nvim-cmp", config = require("config.nvim-cmp") })
+
 		-- Diagnostics menu
 		use({
 			"folke/lsp-trouble.nvim",
@@ -79,6 +86,7 @@ return require("packer").startup({
 		-- TODO(alucbert): ultisnips -> luasnip ?
 		-- use { 'L3MON4D3/LuaSnip', config = require('config.luasnip') }
 		-- Highlighting
+		use({'jvirtanen/vim-hcl'})
 		use({
 			{
 				"nvim-treesitter/nvim-treesitter",
@@ -91,7 +99,12 @@ return require("packer").startup({
 			"IndianBoy42/tree-sitter-just",
 			run = ":lua require('tree-sitter-just').setup({})",
 		})
-		use("norcalli/nvim-colorizer.lua") -- Highlight hex colors
+		-- use("norcalli/nvim-colorizer.lua") -- Highlight hex colors
+		use({
+			"brenoprata10/nvim-highlight-colors",
+			config = require('config.nvim-highlight-colors'),
+		})
+		use("roobert/tailwindcss-colorizer-cmp.nvim")
 		use({
 			"folke/todo-comments.nvim",
 			requires = "nvim-lua/plenary.nvim",
@@ -101,6 +114,7 @@ return require("packer").startup({
 		-- Git
 		use("tpope/vim-fugitive")
 		use("airblade/vim-gitgutter")
+		use("akinsho/git-conflict.nvim")
 
 		-- Project navigation
 		use({ "kyazdani42/nvim-tree.lua", config = require("config.nvim-tree") })
@@ -167,6 +181,11 @@ return require("packer").startup({
 
 		-- Search & replace
 		use("tpope/vim-abolish")
+		-- use("Mateiadrielrafael/scrap.nvim")
+		use({
+			"~/scrap.nvim",
+			config = require("config.scrap")
+		})
 	end,
 	config = {
 		display = {

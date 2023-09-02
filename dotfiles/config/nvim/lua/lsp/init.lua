@@ -70,6 +70,8 @@ return function()
 		{ name = 'gopls' },
 		{ name = 'golangci_lint_ls' },
 		{ name = 'phpactor' },
+		{ name = 'svelte' },
+		{ name = 'tailwindcss' },
 	}
 
 	vim.lsp.protocol.CompletionItemKind = {

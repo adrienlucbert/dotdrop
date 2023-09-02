@@ -23,7 +23,7 @@ return function()
 					"--extend-select",
 					"A,B,BLE,C,N,RUF,U,YTT",
 					"--extend-ignore",
-					"C90,B008,U007",
+					"C90,B008,U007,N999",
 				},
 			}),
 		},

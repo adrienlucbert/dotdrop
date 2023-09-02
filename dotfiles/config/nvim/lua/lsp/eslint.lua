@@ -9,6 +9,7 @@ return {
     'typescriptreact',
     'typescript.tsx',
     'vue',
+		'svelte',
   },
   settings = {
     codeAction = {

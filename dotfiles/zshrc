@@ -29,16 +29,18 @@ ENABLE_CORRECTION="false"
 
 plugins=(
   zsh-autosuggestions
-  git
+  forgit
   docker
+	vi-mode
+	# zsh-vi-mode
 )
 
 source $ZSH/oh-my-zsh.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 ## enable vi mode
-bindkey -v
-export KEYTIMEOUT=1
+# bindkey -v
+# export KEYTIMEOUT=1
 
 ## autocomplete plugins
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
@@ -47,6 +49,8 @@ autoload -Uz compinit && compinit
 complete -C '/usr/bin/aws_completer' aws
 
 # ---- Aliases ----
+alias gds="git diff --staged"
+alias gst="git status"
 ## autoremove unneeded dependencies
 alias autoremove="sudo pacman -Rns \$(pacman -Qtdq)"
 
@@ -59,6 +63,8 @@ alias merge="xrdb ~/.Xresources"
 alias zshconf="$EDITOR ~/.zshrc"
 alias i3conf="$EDITOR ~/.config/i3/config"
 alias vimconf="$EDITOR ~/.config/nvim"
+
+alias v="$EDITOR"
 
 alias c="clear"
 alias locate="find . | ag"
@@ -86,7 +92,11 @@ alias dotdrop="DOTDROP_CONFIG=$HOME/dotdrop/dotdrop/config.yaml dotdrop"
 
 alias luamake=/home/alucbert/install/lua-language-server/3rd/luamake/luamake
 
-alias psh="poetry shell"
+# poetry shell replacement: force-activate poetry environment
+psh()
+{
+	source $(poetry env info --path)/bin/activate
+}
 
 # confirm prompt
 confirm()
@@ -102,9 +112,8 @@ confirm()
 # open a temporary file in nvim with the given extension
 tmp()
 {
-	ext=${1:-md}
-	file=`mktemp --suffix=.$ext`
-	nvim $file && confirm "Delete buffer?" && rm $file || echo $file
+	file=`mktemp --suffix=.${1:-md}`
+	$EDITOR "$file" && echo "$file" || rm "$file"
 }
 
 alias screen="screen -h 1000"
@@ -143,6 +152,12 @@ valgrind()
   (set -o pipefail; /usr/bin/valgrind $@ 2>&1 | colout -t valgrind)
 }
 
+fzfcd()
+{
+	directory="$(find -L . -mindepth 1 -maxdepth 5 -name '\.config' -o -name '\.local' -o \( -name '\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \) -prune -o -type d -print 2>/dev/null | fzf)" || return 1
+	cd "$directory" || return 1
+}
+
 csv()
 {
   if [ -z "$1" ]; then
@@ -152,3 +167,4 @@ csv()
   fi
   column -t -s${2:-,} $1 | less
 }
+command -v atuin >/dev/null && eval "$(atuin init zsh | grep -v "bindkey '\^\[\[A'" | grep -v "bindkey '\^\[OA'")"

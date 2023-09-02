@@ -12,6 +12,10 @@ super + shift + p
 super + Return
 	kitty ~
 
+# launch terminal and open cd fzf
+super + shift + Return
+	popterm bash -c 'dir=$(find -L . -mindepth 1 -maxdepth 5 -name "\.config" -o -name "\.local" -o \( -name "\.*" -o -fstype "sysfs" -o -fstype "devfs" -o -fstype "devtmpfs" -o -fstype "proc" \) -prune -o -type d -print 2>/dev/null | fzf) || exit 1; nohup kitty $dir'
+
 # launch browser
 super + w
   google-chrome

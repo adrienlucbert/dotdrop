@@ -40,4 +40,7 @@ map('n', '<Right>', '<C-w>2>')
 map('n', '<leader>T', ':10sp<CR>:term<CR>A')
 map('t', '<Esc><Esc>', '<C-\\><C-n>')
 
+map('v', '<', '<gv')
+map('v', '>', '>gv')
+
 require('qf').setup({ default_bindings = true })

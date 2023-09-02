@@ -191,6 +191,24 @@ dotfiles:
   f_gitconfig-work:
     src: gitconfig-work
     dst: ~/.gitconfig-work
+  d_profile.d:
+    src: profile.d
+    dst: ~/.profile.d
+  f_profile.d_clipmenu.sh:
+    src: profile.d/CLIPMENU.sh
+    dst: ~/.profile.d/CLIPMENU.sh
+  f_profile.d_consul_credentials.sh:
+    src: profile.d/CONSUL_CREDENTIALS.sh
+    dst: ~/.profile.d/CONSUL_CREDENTIALS.sh
+  f_profile.d_displayce_key.sh:
+    src: profile.d/DISPLAYCE_KEY.sh
+    dst: ~/.profile.d/DISPLAYCE_KEY.sh
+  f_profile.d_go.sh:
+    src: profile.d/GO.sh
+    dst: ~/.profile.d/GO.sh
+  f_profile.d_gsheet_credentials.sh:
+    src: profile.d/GSHEET_CREDENTIALS.sh
+    dst: ~/.profile.d/GSHEET_CREDENTIALS.sh
 profiles:
   home:
     include:
@@ -210,6 +228,12 @@ profiles:
 
     dotfiles:
     - f_gitconfig-work
+    - d_profile.d
+    - f_profile.d_clipmenu.sh
+    - f_profile.d_consul_credentials.sh
+    - f_profile.d_displayce_key.sh
+    - f_profile.d_go.sh
+    - f_profile.d_gsheet_credentials.sh
   work-root:
     variables:
       xkblayout: us

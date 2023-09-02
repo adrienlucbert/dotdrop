@@ -209,6 +209,14 @@ dotfiles:
   f_profile.d_gsheet_credentials.sh:
     src: profile.d/GSHEET_CREDENTIALS.sh
     dst: ~/.profile.d/GSHEET_CREDENTIALS.sh
+  f_local_bin_csl:
+    src: local/bin/csl
+    dst: ~/.local/bin/csl
+    chmod: '755'
+  f_local_bin_popterm:
+    src: local/bin/popterm
+    dst: ~/.local/bin/popterm
+    chmod: '755'
 profiles:
   home:
     include:
@@ -234,6 +242,8 @@ profiles:
     - f_profile.d_displayce_key.sh
     - f_profile.d_go.sh
     - f_profile.d_gsheet_credentials.sh
+    - f_local_bin_csl
+    - f_local_bin_popterm
   work-root:
     variables:
       xkblayout: us

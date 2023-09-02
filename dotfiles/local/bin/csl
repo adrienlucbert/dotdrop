@@ -1,0 +1,11 @@
+#!/bin/sh
+
+if ! tty -s; then
+	popterm csl
+	exit
+fi
+
+kv=$(consul kv export)
+key=$(echo "$kv" | jq -r '.[].key' | ${CONSUL_KV_SEARCHER:=fzf})
+value=$(echo "$kv" | jq -r ".[] | select(.key==\"$key\") | .value")
+printf "%s" "$value" | base64 -d | nohup xclip -loops 0 -sel c >/dev/null 2>&1

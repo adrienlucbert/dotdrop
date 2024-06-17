@@ -58,13 +58,13 @@ on() {
   on "startup reload" feh --bg-fill ~/.wall
 
   # Auto lock when idle
-  on "startup wakeup reload" -R idlelock
+  # on "startup wakeup reload" -R idlelock
 
   # Notification daemon
   on "startup reload" -R dunst -config ~/.config/dunst/dunstrc
 
   # Compositor
-  on "startup reload" picom --config ~/.config/picom/picom.conf
+  # on "startup reload" picom --config ~/.config/picom/picom.conf
   # on "$always" xcompmgr
 
   # Network manager applet
@@ -81,6 +81,9 @@ on() {
 
   # Hotkey daemon 
   on "startup reload" -R sxhkd -c ~/.config/sxhkd/sxhkdrc
+
+  # Clipboard manager
+  on "startup reload" -R clipmenud
 
 	# Synchronize notable repository
 	# on "startup wakeup" -R gitsync -f "%f" ~/.notable

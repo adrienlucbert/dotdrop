@@ -1,0 +1,6 @@
+- ... : fill qf list
+- zf : enter fzf mode
+- search for pattern
+- ctrl-o : toggle all
+- ctrl-q : leave fzf mode and toggle signs for selected items
+- zn/zN : create new qf list with only selected/unselected items

@@ -15,10 +15,7 @@ return function()
         -- You can change the order of elements in the sidebar
         elements = {
           -- Provide as ID strings or tables with "id" and "size" keys
-          {
-            id = "scopes",
-            size = 0.25, -- Can be float or integer > 1
-          },
+          { id = "scopes", size = 0.25 }, -- Can be float or integer > 1 
           { id = "breakpoints", size = 0.25 },
           { id = "stacks", size = 0.25 },
           { id = "watches", size = 00.25 },
@@ -39,6 +36,7 @@ return function()
       mappings = {
         close = { "q", "<Esc>" },
       },
+			position = "center"
     },
     windows = { indent = 1 },
   })

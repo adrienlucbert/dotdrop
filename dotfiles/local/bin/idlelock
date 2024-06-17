@@ -3,6 +3,17 @@
 xidlehook \
   --not-when-audio \
   --not-when-fullscreen \
-  --timer 0 '' '' \
-  --timer 300 'powercontrol lock' '' \
-  --timer 600 'powercontrol suspend' ''
+	--timer 25 \
+    'xlight sub 0.3' \
+    'xlight add 0.3' \
+	--timer 5 \
+		'xlight add 0.3; powercontrol lock' \
+		'' #\
+  # --timer 600 \
+	# 	'powercontrol suspend' \
+	# 	''
+
+# exec xautolock \
+# 	-detectsleep \
+# 	-time 10 \
+# 	-locker "powercontrol lock"

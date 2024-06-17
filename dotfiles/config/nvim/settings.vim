@@ -7,7 +7,7 @@ colorscheme jellybeans
 set termguicolors
 set hidden
 set number
-set relativenumber
+" set relativenumber
 set nowrap
 set scrolloff=999
 set sidescrolloff=8

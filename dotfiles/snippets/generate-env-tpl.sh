@@ -1,0 +1,1 @@
+./scripts/consul_template_env.sh ${CONSUL_HTTP_ADDR} ${CONSUL_USER} ${CONSUL_PASSWORD}

@@ -9,6 +9,13 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
+# class                 border  backgr. text    indicator child_border
+client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
+client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+client.urgent           #2f343a #900000 #ffffff #900000   #900000
+client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -32,7 +39,6 @@ default_floating_border none
 # exec --no-startup-id nm-applet
 
 exec --no-startup-id ~/.config/autostart.sh startup &
-exec --no-startup-id ~/.config/i3/scripts/fix-unity-redraw.sh &
 
 # Use pactl to adjust volume in PulseAudio.
 set $unity-refresh exec i3-msg [class="Unity"] fullscreen toggle; exec i3-msg [class="Unity"] fullscreen toggle
@@ -44,6 +50,21 @@ set $unity-refresh exec i3-msg [class="Unity"] fullscreen toggle; exec i3-msg [c
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
+
+for_window [class="floating-term"] floating enable
+for_window [class="floating-term"] resize set 800 400
+for_window [class="floating-term"] border pixel 2
+for_window [class="floating-term"] move position center
+
+for_window [class="floating-prompt.*"] floating enable
+for_window [class="floating-prompt.*"] border pixel 2
+for_window [class="floating-prompt.*"] move position center
+for_window [class="floating-prompt.*"] resize set 800 50
+for_window [class="floating-prompt-100"] resize set 800 100
+for_window [class="floating-prompt-200"] resize set 800 200
+for_window [class="floating-prompt-300"] resize set 800 300
+for_window [class="floating-prompt-400"] resize set 800 400
+for_window [class="floating-prompt-500"] resize set 800 500
 
 focus_follows_mouse no
 
@@ -102,7 +123,7 @@ focus_wrapping no
 # bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-# bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
 # bindsym $mod+space focus mode_toggle

@@ -10,11 +10,23 @@ super + shift + p
 
 # launch terminal emulator
 super + Return
-	kitty
+	kitty ~
+
+# launch terminal and open fzfcd
+super + shift + Return
+	popterm bash -c 'dir=$(find -L . -mindepth 1 -maxdepth 8 -name "\.config" -o -name "\.local" -o \( -name "\.*" -o -fstype "sysfs" -o -fstype "devfs" -o -fstype "devtmpfs" -o -fstype "proc" \) -prune -o -type d -print 2>/dev/null | fzf) || exit 1; nohup kitty $dir'
+
+# launch terminal and open fzfcdf
+super + shift + F
+	popterm bash -c 'file=$(find -L . -mindepth 1 -maxdepth 8 -name "\.config" -o -name "\.local" -o \( -name "\.*" -o -fstype "sysfs" -o -fstype "devfs" -o -fstype "devtmpfs" -o -fstype "proc" \) -prune -o -type f -print 2>/dev/null | fzf) || exit 1; nohup kitty $(dirname $file)'
+
+# launch terminal and open snippets selector
+super + shift + S
+	popterm snips
 
 # launch browser
 super + w
-  google-chrome
+  web-browser
 
 # launch file explorer
 super + e
@@ -31,6 +43,10 @@ ctrl + alt + Delete
 # Spotify control
 super + m; {h,Return,l}
   playerctl -p spotify,spotifyd {previous,play-pause,next}
+
+# Spotify control
+ctrl + shift + {h,l}
+  playerctl -p spotify,spotifyd position 10{-,+}
 
 # make sxhkd reload its configuration files:
 super + shift + r
@@ -54,21 +70,29 @@ ctrl + {shift + ,_} space
 {_,shift + ,alt + }{ctrl + ,_} @Print
   scrot {-e,-fs -e,-ue} {'mkdir -p ~/screenshots && mv $f ~/screenshots','xclip -sel clip -target image/png -i $f && rm $f'}
 
+# mute microphone
+XF86AudioMicMute
+  pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
 # mute sound
 XF86AudioMute
-  amixer set Master toggle
+  pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 # raise/lower volume
 XF86Audio{Raise,Lower}Volume
-  amixer set Master {5%+,5%-} unmute
+  pactl set-sink-volume @DEFAULT_SINK@ {+5%,-5%}
 
 # raise laptop brightness
 XF86MonBrightnessUp
-  xbacklight -inc 5
+  light -A 10
 
 # lower laptop brightness
 XF86MonBrightnessDown
-  xbacklight -dec 5
+  light -U 10
+
+# display options
+XF86Display
+	monitorcontrol
 
 # raise global brightness
 shift + XF86MonBrightnessUp
@@ -122,6 +146,8 @@ super + f
 super + shift + space
   i3-msg floating toggle
 
+super + minus
+	i3-msg scratchpad show || i3-msg move scratchpad
 # }
 
 

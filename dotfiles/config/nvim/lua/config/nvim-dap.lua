@@ -20,6 +20,8 @@ return function()
     command = '/usr/bin/lldb-vscode',
     name = 'lldb'
   }
+	require('dap-python').setup()
+	require('dap-go').setup()
 
   -- adapters configurations
   dap.configurations.cpp = {
@@ -38,7 +40,16 @@ return function()
     }
   }
   dap.configurations.c = dap.configurations.cpp
+	dap.configurations.python = {
+		{
+			name = 'Launch',
+			type = 'python',
+			request = 'launch',
+			program = '${file}',
+			-- ... more options, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings
+		},
+	}
   local root = vim.fn.finddir('.git/..', ';')
   require('dap.ext.vscode').load_launchjs(root .. '/.vim/launch.json') -- parse .vim/launch.json if exists
-  require('dap.ext.vscode').load_launchjs(root .. '/.vscode/launch.json') -- parse .vim/launch.json if exists
+  require('dap.ext.vscode').load_launchjs(root .. '/.vscode/launch.json') -- parse .vscode/launch.json if exists
 end

@@ -37,6 +37,9 @@ return function ()
         end
       end,
     },
+		formatting = {
+			format = require("tailwindcss-colorizer-cmp").formatter,
+		},
     sources = {
       { name = 'path' },
       { name = 'buffer' },

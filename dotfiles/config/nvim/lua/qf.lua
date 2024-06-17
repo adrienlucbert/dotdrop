@@ -3,7 +3,7 @@
 local map = require("utils").map
 local mergetbl = require("utils").mergetbl
 
-M = {}
+local M = {}
 
 local config = {
 	-- Prefer using the loclist when guessing the list type for an action.
@@ -248,10 +248,10 @@ function M.setup(config)
 		map('n', '<leader>q', '<cmd>QFToggle<CR>')
 		map('n', '<leader>Q', '<cmd>QFToggle! c<CR>')
 		map('n', '<leader>L', '<cmd>QFToggle! l<CR>')
-		map('n', '[q', '<cmd>QFPrev!<CR>')
-		map('n', ']q', '<cmd>QFNext!<CR>')
-		map('n', '[Q', '<cmd>QFFirst<CR>')
-		map('n', ']Q', '<cmd>QFLast<CR>')
+		map('n', '<C-[>', '<cmd>QFPrev!<CR>')
+		map('n', '<C-]>', '<cmd>QFNext!<CR>')
+		map('n', '[G', '<cmd>QFFirst<CR>')
+		map('n', ']G', '<cmd>QFLast<CR>')
 	end
 end
 

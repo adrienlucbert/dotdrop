@@ -66,13 +66,14 @@ function get_brightness()
 ##
 function set_brightness()
 {
-    if (( $(echo "$1 <= 0.0" | bc) || $(echo "$1 > 1.0" | bc) )); then
-        print_error "Out of bounds (0.0 -> 1.0)"
-        exit 1
-    fi
+    # if (( $(echo "$1 <= 0.0" | bc) || $(echo "$1 > 1.0" | bc) )); then
+    #     print_error "Out of bounds (0.0 -> 1.0)"
+    #     exit 1
+    # fi
     if [ ! -z "$2" ]; then
         xrandr --output $2 --brightness $1
     else
+				# dunstify -a "changeBrightness" -u low -h string:x-dunst-stack-tag:brightness -h int:value:"$(( $1 * 100 ))" "Brightness: $1"
         for i in "${!monitors[@]}"; do
             set_brightness $1 ${monitors[$i]}
         done

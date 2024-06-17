@@ -40,4 +40,11 @@ map('n', '<Right>', '<C-w>2>')
 map('n', '<leader>T', ':10sp<CR>:term<CR>A')
 map('t', '<Esc><Esc>', '<C-\\><C-n>')
 
+-- Re-select selection after moving it left/right with </>
+map('v', '<', '<gv')
+map('v', '>', '>gv')
+
+-- Preserve clipboard when pasting over selection
+map('v', 'p', 'pgvy')
+
 require('qf').setup({ default_bindings = true })

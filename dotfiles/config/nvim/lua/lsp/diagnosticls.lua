@@ -37,6 +37,6 @@ return {
     }
   },
   on_attach_options = {
-    disable_formatting = true
+    disable_formatting = false
   }
 }

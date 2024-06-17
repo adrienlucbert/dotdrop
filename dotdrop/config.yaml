@@ -181,6 +181,12 @@ dotfiles:
     src: lib/systemd/system-sleep/autostart.sh
     dst: /lib/systemd/system-sleep/autostart.sh
     chmod: '755'
+  d_config_nvim.lazy:
+    src: config/nvim.lazy
+    dst: ~/.config/nvim.lazy
+  d_snippets:
+    src: snippets
+    dst: ~/.snippets
 profiles:
   home:
     variables:
@@ -198,6 +204,7 @@ profiles:
     - f_config_polybar_modules_vpn.ini
     - f_iex.exs
     - d_iex.d
+    - d_config_nvim.lazy
   root-tty:
     dotfiles:
     - f_etc_paru.conf
@@ -260,3 +267,4 @@ profiles:
     - f_local_bin_qqr
     - f_local_bin_clipqqr
     - d_screenlayout
+    - d_snippets

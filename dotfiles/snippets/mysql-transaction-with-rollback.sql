@@ -1,0 +1,4 @@
+start transaction;
+
+rollback;
+commit;

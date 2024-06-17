@@ -54,7 +54,7 @@ return function()
 
 	local servers = {
 		require('lsp.eslint'),
-		require('lsp.sumneko_lua'),
+		require('lsp.lua_ls'),
 		require('lsp.diagnosticls'),
 		require('lsp.nvim-lsp-ts-utils'),
 		require('lsp.texlab'),
@@ -69,6 +69,9 @@ return function()
 		{ name = 'jsonls' },
 		{ name = 'gopls' },
 		{ name = 'golangci_lint_ls' },
+		{ name = 'phpactor' },
+		{ name = 'svelte' },
+		{ name = 'tailwindcss' },
 	}
 
 	vim.lsp.protocol.CompletionItemKind = {

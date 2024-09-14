@@ -1,0 +1,1 @@
+just build-dist && pip3 install --force --no-deps dist/*.whl

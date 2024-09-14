@@ -40,6 +40,9 @@ super + s
 ctrl + alt + Delete
   kitty -e htop
 
+super + shift + semicolon
+	dmoji
+
 # Spotify control
 super + m; {h,Return,l}
   playerctl -p spotify,spotifyd {previous,play-pause,next}

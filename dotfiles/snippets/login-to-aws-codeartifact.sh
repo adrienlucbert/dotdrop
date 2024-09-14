@@ -1,0 +1,1 @@
+aws codeartifact login --tool pip --repository displayce-micro-tools --domain displayce-micro-tools --domain-owner 358925260503

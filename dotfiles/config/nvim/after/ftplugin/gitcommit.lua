@@ -1,3 +1,0 @@
--- if vim.fn.tabpagewinnr(vim.fn.tabpagenr(), '$') == 1 then
--- 	vim.api.nvim_command('botright vsplit | vertical resize ' .. (vim.api.nvim_win_get_width(0) - 100))
--- end

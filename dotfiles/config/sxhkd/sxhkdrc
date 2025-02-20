@@ -24,6 +24,10 @@ super + shift + F
 super + shift + S
 	popterm snips
 
+# launch terminal and open pulsemixer (tui pavucontrol alternative)
+super + shift + m
+	popterm pulsemixer
+
 # launch browser
 super + w
   web-browser

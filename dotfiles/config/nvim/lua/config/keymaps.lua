@@ -12,8 +12,7 @@ map("n", "//", ":nohlsearch<CR>")
 
 -- General
 map("n", "<c-s-i>", "<cmd>LazyFormat<cr>")
--- vim.keymap.del("n", "<leader>cd", { desc = "Line Diagnostics" })
--- vim.keymap.set("n", "L", "<cmd>lua vim.diagnostic.open_float()<CR>")
+map("n", "<leader>lg", "<cmd>lua Snacks.lazygit()<cr>")
 
 -- Tabs
 map("n", "T", ":tabnew<cr>")

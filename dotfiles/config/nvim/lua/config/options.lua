@@ -10,7 +10,19 @@ vim.g.mapleader = ","
 -- Lazy -----------------------------------------------------------------------
 
 vim.g.root_spec = {
-  { ".git", "lua", "go.mod", "setup.py", "package.json", "Makefile", "justfile", "Dockerfile", "init.lua", "svelte.config.js" },
+  {
+    ".git",
+    "lua",
+    "go.mod",
+    "main.py",
+    "setup.py",
+    "package.json",
+    "Makefile",
+    "justfile",
+    "Dockerfile",
+    "init.lua",
+    "svelte.config.js",
+  },
   "lsp",
   "cwd",
 }

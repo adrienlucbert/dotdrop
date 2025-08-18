@@ -99,7 +99,7 @@ XF86MonBrightnessDown
 
 # display options
 XF86Display
-	monitorcontrol
+	autorandrmenu
 
 # raise global brightness
 shift + XF86MonBrightnessUp

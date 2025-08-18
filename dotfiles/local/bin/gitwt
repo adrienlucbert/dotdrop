@@ -1,0 +1,117 @@
+#!/bin/sh
+
+WORKTREES_LOCATION=${WORKTREES_LOCATION:-$HOME/.gitworktrees}
+mkdir -p "$WORKTREES_LOCATION"
+
+usage_and_exit() {
+	(
+		echo "Git worktrees enhanced"
+		echo ""
+		echo "Usage: $(basename "$0") [OPTION]... [COMMAND] [ARGS]..."
+		echo "
+	-h, --help|print this help
+	list|List details of each worktree
+	add [branch]|Create a worktree and checkout \`branch\` into it. If \`branch\` is not provided, it can be chosen from the list of local branches. If it does not exist, it is created.
+	switch [worktree]|Switch to the worktree referenced by \`worktree\` or chosen from the list (if \`worktree\` is not provided)
+	rm [worktree]|Remove the worktree referenced by \`worktree\` or chosen from the list (if \`worktree\` is not provided)
+	" | column -t -s '|'
+	) >&2
+	exit "${1:-1}"
+}
+
+# HELPERS
+confirm() {
+	printf "%s [y/N] " "${1:-Are you sure?}"
+	read confirm
+	case "$confirm" in
+		[Yy] | [Yy][Ee][Ss]) true ;;
+		*) false ;;
+	esac
+}
+
+ensure_inside_git() {
+	if ! git rev-parse --is-inside-work-tree &> /dev/null; then
+		echo "fatal: not a git repository" >&2 
+		exit 1
+	fi
+}
+
+repo_uuid() {
+	git rev-list --parents HEAD | tail -1
+}
+
+pick_git_branch() {
+	git for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:short) %(refname:short) [%(committerdate:relative) by %(authorname)]' | fzf | cut -d' ' -f2
+}
+
+pick_git_worktree() {
+	git worktree list | tail -n+2 | awk '{gsub(/\[|\]/, "", $3); print $1, $3}' | fzf -d' ' --with-nth=2 | cut -d' ' -f1
+}
+
+# COMMANDS
+list() {
+	ensure_inside_git
+	git worktree list
+}
+
+switch() {
+	ensure_inside_git
+	worktree="$1"
+	[ -z "$worktree" ] && worktree=$(pick_git_worktree)
+	[ -z "$worktree" ] && exit 1
+	cd $worktree
+	exec $SHELL
+}
+
+add() {
+	ensure_inside_git
+	repo_worktrees_location=${WORKTREES_LOCATION}/$(repo_uuid)
+	mkdir -p $repo_worktrees_location
+	args="-b"
+	branch="$1"
+	git show-ref --quiet "$branch" && args="" # no "new-branch" if already exists
+	[ -z "$branch" ] && branch=$(pick_git_branch) && args=""
+	[ -z "$branch" ] && exit 1
+	worktree=${repo_worktrees_location}/${branch}
+	git worktree add ${worktree} --checkout ${args} ${branch} && switch ${worktree}
+}
+
+remove() {
+	ensure_inside_git
+	worktree=$(pick_git_worktree)
+	[ -z "$worktree" ] && exit 1
+	if ! git worktree remove "$worktree"; then
+		confirm && git worktree remove "$worktree" --force
+	fi
+}
+
+while [ $# -gt 0 ]; do
+	case "$1" in
+	-h | --help) usage_and_exit 0 ;;
+	list)
+		shift
+		list
+		exit 0
+		;;
+	add)
+		shift
+		add "$@"
+		exit 0
+		;;
+	switch)
+		shift
+		switch "$@"
+		exit 0
+		;;
+	rm)
+		shift
+		remove "$@"
+		exit 0
+		;;
+	*)
+		usage_and_exit 1
+		;;
+	esac
+done
+
+usage_and_exit 1

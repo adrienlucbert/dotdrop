@@ -1,6 +1,7 @@
 ! SOURCE COLOR THEME !
-#include "/home/alucbert/.xres/themes/nord"
+! #include "/home/alucbert/.xres/themes/nord"
 
+Xft.dpi: 96
 Xcursor.size: 16
 
 ! SOURCE PROGRAM SPECIFIC CONFIGS !

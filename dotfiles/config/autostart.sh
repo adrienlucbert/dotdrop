@@ -64,7 +64,7 @@ on() {
   on "startup reload" -R dunst -config ~/.config/dunst/dunstrc
 
   # Compositor
-  # on "startup reload" picom --config ~/.config/picom/picom.conf
+  on "startup reload" picom --config ~/.config/picom/picom.conf
   # on "$always" xcompmgr
 
   # Network manager applet
@@ -73,7 +73,7 @@ on() {
   # Bluetooth applet
   on "startup reload" blueman-applet
 
-	# Enable media controls via bluetooth device
+  # Enable media controls via bluetooth device
   on "startup wakeup reload" mpris-proxy
 
   # Automatic screen temperature and brightness
@@ -82,15 +82,15 @@ on() {
   # Hotkey daemon 
   on "startup reload" -R sxhkd -c ~/.config/sxhkd/sxhkdrc
 
-  # Clipboard manager
-  on "startup reload" -R clipmenud
+  # # Clipboard manager
+  # on "startup reload" -R clipmenud
 
-	# Synchronize notable repository
-	# on "startup wakeup" -R gitsync -f "%f" ~/.notable
-	on "startup wakeup" -R gitsync -f "%f" ~/.notable
+  # Synchronize notable repository
+  # on "startup wakeup" -R gitsync -f "%f" ~/.notable
+  on "startup wakeup" -R gitsync -f "%f" ~/.notable
 
-	# Synchronize keepass repository
-	# on "startup wakeup" -R gitsync -f "%f" ~/.keepass
-	on "startup wakeup" -R gitsync -f "%f" ~/.keepass
+  # # Synchronize keepass repository
+  # # on "startup wakeup" -R gitsync -f "%f" ~/.keepass
+  # on "startup wakeup" -R gitsync -f "%f" ~/.keepass
 
 # }}}

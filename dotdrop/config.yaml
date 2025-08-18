@@ -76,9 +76,6 @@ dotfiles:
   d_config_polybar:
     src: config/polybar
     dst: ~/.config/polybar
-  f_config_polybar_modules_vpn.ini:
-    src: config/polybar/modules/vpn.ini
-    dst: ~/.config/polybar/modules/vpn.ini
   d_config_dunst:
     src: config/dunst
     dst: ~/.config/dunst
@@ -187,6 +184,14 @@ dotfiles:
   d_snippets:
     src: snippets
     dst: ~/.snippets
+  f_local_bin_gitwt:
+    src: local/bin/gitwt
+    dst: ~/.local/bin/gitwt
+    chmod: '755'
+  f_local_bin_vpn:
+    src: local/bin/vpn
+    dst: ~/.local/bin/vpn
+    chmod: '755'
 profiles:
   home:
     variables:
@@ -201,10 +206,10 @@ profiles:
     include:
     - gui
     dotfiles:
-    - f_config_polybar_modules_vpn.ini
     - f_iex.exs
     - d_iex.d
     - d_config_nvim.lazy
+
   root-tty:
     dotfiles:
     - f_etc_paru.conf
@@ -235,6 +240,8 @@ profiles:
     - f_gitconfig
     - f_local_bin_namedproc
     - f_local_bin_db
+    - f_local_bin_gitwt
+    - f_local_bin_vpn
 
   gui:
     include:

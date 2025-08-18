@@ -1,0 +1,195 @@
+#!/bin/sh
+
+usage_and_exit() {
+	(
+		echo "VPN manager"
+		echo ""
+		echo "Usage: $(basename "$0") COMMAND [ARGS...]"
+		echo "
+	-h, --help|print this help
+	list|List known VPN solutions
+	current|Print the currently active VPN solution, if any
+	status [NAME]|Show state of the VPN solution by NAME (defaults to VPN in use, if any)
+	switch [NAME]|Switch to the VPN solution by NAME (if none, prompts using fzf), stopping other(s)
+	start NAME|Start the VPN solution by NAME (if none, prompts using fzf)
+	stop [NAME]|Stop the VPN solution by NAME (defaults to all VPN)
+	" | column -t -s '|'
+	) >&2
+	exit "${1:-1}"
+}
+
+error_unknown_vpn() {
+	echo "Unknown VPN: \"$@\"" >&2
+	exit 1
+}
+
+pick_vpn() {
+	list | fzf --select-1 | sed 's/ (current)$//'
+}
+
+list() {
+	current=$(current)
+	[ "$current" = "tailscale" ] && echo "tailscale (current)" || echo "tailscale"
+	[ "$current" = "wireguard@wg0" ] && echo "wireguard@wg0 (current)" || echo "wireguard@wg0"
+}
+
+current() {
+	$(status_tailscale 2>&1 >/dev/null) && {
+		echo tailscale
+		exit 0
+	}
+	$(status_wireguard 2>&1 >/dev/null) && {
+		echo "wireguard@wg0"
+		exit 0
+	}
+	exit 1
+}
+
+status() {
+	vpn=$1
+	case "$vpn" in
+	"tailscale")
+		status_tailscale
+		;;
+	"wireguard@wg0")
+		status_wireguard
+		;;
+	"")
+		ok=0
+		status=$(status_tailscale 2>&1)
+		[ $? -eq 0 ] && {
+			printf "🟢 "
+			ok=1
+		} || printf "🔴 "
+		printf "\033[1mtailscale\033[0m\n$status\n\n"
+		status=$(status_wireguard 2>&1)
+		[ $? -eq 0 ] && {
+			printf "🟢 "
+			ok=1
+		} || printf "🔴 "
+		printf "\033[1mwireguard@wg0\033[0m\n$status\n"
+		[ $ok -eq 0 ] && exit 1 || exit 0
+		;;
+	*)
+		error_unknown_vpn $vpn
+		;;
+	esac
+}
+
+switch() {
+	vpn=$1
+	[ -z "$vpn" ] && vpn=$(pick_vpn) || exit 1
+	$(stop 2>/dev/null)
+	case "$vpn" in
+	"tailscale")
+		start_tailscale
+		return $?
+		;;
+	"wireguard@wg0")
+		start_wireguard
+		return $?
+		;;
+	*)
+		error_unknown_vpn
+		;;
+	esac
+}
+
+start() {
+	vpn=$1
+	[ -z "$vpn" ] && vpn=$(pick_vpn) || exit 1
+	case "$vpn" in
+	"tailscale")
+		start_tailscale
+		;;
+	"wireguard@wg0")
+		start_wireguard
+		;;
+	*)
+		error_unknown_vpn
+		;;
+	esac
+}
+
+stop() {
+	vpn=$1
+	case "$vpn" in
+	"tailscale")
+		stop_tailscale
+		exit 0
+		;;
+	"wireguard@wg0")
+		stop_wireguard
+		exit 0
+		;;
+	"")
+		stop_tailscale
+		stop_wireguard
+		exit 0
+		;;
+	*)
+		error_unknown_vpn
+		;;
+	esac
+}
+
+start_tailscale() {
+	sudo tailscale up
+}
+stop_tailscale() {
+	sudo tailscale down
+}
+status_tailscale() {
+	tailscale status
+}
+
+start_wireguard() {
+	sudo systemctl start wg-quick@wg0
+}
+stop_wireguard() {
+	sudo systemctl stop wg-quick@wg0
+}
+status_wireguard() {
+	systemctl status wg-quick@wg0
+}
+
+while [ $# -gt 0 ]; do
+	case "$1" in
+	-h | --help) usage_and_exit 0 ;;
+	list)
+		shift
+		list
+		exit 0
+		;;
+	current)
+		shift
+		current
+		exit 0
+		;;
+	status)
+		shift
+		status "$@"
+		exit 0
+		;;
+	switch)
+		shift
+		switch "$@"
+		exit 0
+		;;
+	start)
+		shift
+		start "$@"
+		exit 0
+		;;
+	stop)
+		shift
+		stop "$@"
+		exit 0
+		;;
+	*)
+		usage_and_exit 1
+		;;
+	esac
+done
+
+list

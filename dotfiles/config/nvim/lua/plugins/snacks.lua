@@ -6,6 +6,7 @@ return {
       dashboard = { enabled = false },
       indent = { enabled = false },
       notifier = { enabled = false },
+      -- image = { enabled = true },
     },
   },
 }

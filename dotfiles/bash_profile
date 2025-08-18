@@ -3,3 +3,5 @@
 #
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
+
+. "$HOME/.atuin/bin/env"

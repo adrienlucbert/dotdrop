@@ -11,7 +11,9 @@ return {
           require("neotest-go")({
             args = { "-timeout=30s" },
           }),
-          require("neotest-python"),
+          require("neotest-python")({
+            args = { "-o", "addopts=''" },
+          }),
         },
       }
     end,

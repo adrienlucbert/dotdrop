@@ -24,14 +24,14 @@ confirm() {
 	printf "%s [y/N] " "${1:-Are you sure?}"
 	read confirm
 	case "$confirm" in
-		[Yy] | [Yy][Ee][Ss]) true ;;
-		*) false ;;
+	[Yy] | [Yy][Ee][Ss]) true ;;
+	*) false ;;
 	esac
 }
 
 ensure_inside_git() {
-	if ! git rev-parse --is-inside-work-tree &> /dev/null; then
-		echo "fatal: not a git repository" >&2 
+	if ! git rev-parse --is-inside-work-tree 2>&1 >/dev/null; then
+		echo "fatal: not a git repository" >&2
 		exit 1
 	fi
 }
@@ -59,7 +59,11 @@ switch() {
 	worktree="$1"
 	[ -z "$worktree" ] && worktree=$(pick_git_worktree)
 	[ -z "$worktree" ] && exit 1
-	cd $worktree
+	repo=$(git rev-parse --show-toplevel 2>/dev/null)
+	cwd=$(pwd)
+	relpath=${cwd#"$repo"} # strip repo path from cwd
+	relpath=${relpath#/}   # strip leading / if any
+	cd $worktree/$relpath
 	exec $SHELL
 }
 

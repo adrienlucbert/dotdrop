@@ -1,6 +1,6 @@
 return {
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts = {
       ensure_installed = {
         "black",
@@ -13,10 +13,11 @@ return {
         "elixir-ls",
         "gofumpt",
         "goimports",
-        "golangci-lint",
+        -- "golangci-lint" -- installed on the host machine at a specific version
         "golangci-lint-langserver",
         "gomodifytags",
         "gopls",
+        "impl",
         "hclfmt",
         "json-lsp",
         "lua-language-server",
@@ -29,7 +30,6 @@ return {
         "phpcs",
         "pyright",
         "ruff",
-        "ruff-lsp",
         "shellcheck",
         "shfmt",
         "sqlfluff",
@@ -38,7 +38,12 @@ return {
         "tailwindcss-language-server",
         "yaml-language-server",
       },
+      automatic_installation = false,
     },
+  },
+  {
+    "mason-org/mason-lspconfig.nvim",
+    opts = {},
   },
   {
     "jay-babu/mason-nvim-dap.nvim",
@@ -47,7 +52,7 @@ return {
         "python",
         "delve",
       },
-      automatic_installation = true,
+      automatic_installation = false,
     },
   },
 }

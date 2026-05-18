@@ -10,15 +10,27 @@ super + shift + p
 
 # launch terminal emulator
 super + Return
-	kitty ~
+	kitty tmux new -c ~
 
 # launch terminal and open fzfcd
 super + shift + Return
-	popterm bash -c 'dir=$(find -L . -mindepth 1 -maxdepth 8 -name "\.config" -o -name "\.local" -o \( -name "\.*" -o -fstype "sysfs" -o -fstype "devfs" -o -fstype "devtmpfs" -o -fstype "proc" \) -prune -o -type d -print 2>/dev/null | fzf) || exit 1; nohup kitty $dir'
+	popterm bash -c 'dir=$(find -L . -mindepth 1 -maxdepth 8 -name "\.config" -o -name "\.local" -o \( -name "\.*" -o -fstype "sysfs" -o -fstype "devfs" -o -fstype "devtmpfs" -o -fstype "proc" \) -prune -o -type d -print 2>/dev/null | fzf) || exit 1; nohup kitty tmux new -c $dir'
 
 # launch terminal and open fzfcdf
 super + shift + F
-	popterm bash -c 'file=$(find -L . -mindepth 1 -maxdepth 8 -name "\.config" -o -name "\.local" -o \( -name "\.*" -o -fstype "sysfs" -o -fstype "devfs" -o -fstype "devtmpfs" -o -fstype "proc" \) -prune -o -type f -print 2>/dev/null | fzf) || exit 1; nohup kitty $(dirname $file)'
+	popterm bash -c 'file=$(find -L . -mindepth 1 -maxdepth 8 -name "\.config" -o -name "\.local" -o \( -name "\.*" -o -fstype "sysfs" -o -fstype "devfs" -o -fstype "devtmpfs" -o -fstype "proc" \) -prune -o -type f -print 2>/dev/null | fzf) || exit 1; nohup kitty tmux new -c $(dirname $file)'
+
+# launch a new tmux session
+super + t
+	kitty tmux new
+
+# choose and launch a tmux session
+super + shift + T
+	popterm bash -c 'session=$(tmux list-sessions -F "#{session_name}" | fzf -0 --select-1 --prompt="Session> "); if [ -z "$session" ]; then nohup kitty tmux new -c ~; else nohup kitty tmux attach-session -t "$session"; fi'
+
+# launch terminal and open bluetoothctl
+super + shift + B
+	popterm bash -c 'bluetoothctl'
 
 # launch terminal and open snippets selector
 super + shift + S
@@ -35,10 +47,6 @@ super + w
 # launch file explorer
 super + e
   pcmanfm
-
-# launch a tui spotify client
-super + s
-  kitty -e spt
 
 # launch process viewer
 ctrl + alt + Delete
@@ -185,10 +193,6 @@ super + shift + {1-9,0}
 ## move a floating window
 #super + {h,j,k,l}
 #  bspc node -v {-20 0,0 20,0 -20,20 0}
-
-# open TO-DO list in nvim
-super + t
-	kitty -e nvim ~/.notable/notes/TODOs.md
 
 # open Notable notes list in nvim
 super + n

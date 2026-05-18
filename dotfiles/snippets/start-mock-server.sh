@@ -1,1 +1,0 @@
-dc up -d mocks

@@ -11,6 +11,9 @@ return {
     config = function()
       require("telescope").setup({
         defaults = {
+          preview = {
+            filesize_limit = 5, -- MB
+          },
           vimgrep_arguments = {
             "rg",
             "--color=never",
@@ -19,6 +22,8 @@ return {
             "--line-number",
             "--column",
             "--smart-case",
+            "--max-filesize",
+            "5M",
           },
           file_ignore_patterns = {
             "deps/.*",

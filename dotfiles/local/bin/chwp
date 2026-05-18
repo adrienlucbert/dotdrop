@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 HOME=/home/alucbert
 wps_dir="$HOME/.config/wallpapers"
@@ -9,7 +9,8 @@ wps_dir="$HOME/.config/wallpapers"
 
 ln -fs $wps_dir/$wp $HOME/.wall
 feh --bg-fill $HOME/.wall
-betterlockscreen -u $HOME/.wall
+magick ~/.wall -fill black -colorize 40% -filter Gaussian -resize 20.00% -define filter:sigma=.6 -resize 1920x1080^ -gravity center -extent 1920x1080 ~/.wall-lock
+# betterlockscreen -u $HOME/.wall
 
 #[ $(id -u) -ne 0 ] && >&2 echo "Please run as root" && exit 1
 #cp $HOME/.cache/i3lock/current/dimblur.png /usr/share/sddm/themes/firark/Assets/background.png

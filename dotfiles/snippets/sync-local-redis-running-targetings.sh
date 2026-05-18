@@ -1,1 +1,0 @@
-redis-cli -h rtb-redis.displayce.com -p 13380 get bidder_running_targetings_snapshot | redis-cli -x SET bidder_running_targetings_snapshot

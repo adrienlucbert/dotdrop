@@ -16,7 +16,7 @@ dotfiles:
   f_zsh_profile:
     src: zsh_profile
     dst: ~/.zsh_profile
-    chmod: '755'
+    chmod: '777'
   f_xinitrc:
     src: xinitrc
     dst: ~/.xinitrc

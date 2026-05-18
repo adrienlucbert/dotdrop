@@ -1,1 +1,2 @@
+[[ -f /etc/profile ]] && source /etc/profile
 [[ -f $HOME/.profile ]] && source $HOME/.profile
